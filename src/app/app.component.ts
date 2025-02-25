@@ -3,9 +3,8 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports:[RouterOutlet],
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'hotel-reservation-system-frontend';
