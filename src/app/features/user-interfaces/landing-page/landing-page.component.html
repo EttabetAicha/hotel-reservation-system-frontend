@@ -1,1 +1,422 @@
-<p>landing-page works!</p>
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+  <!-- Header -->
+  <header class="fixed w-full z-50 bg-white/90 backdrop-blur-lg border-b border-blue-100 shadow-sm">
+    <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-2" @fadeInUp>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+        <span class="text-2xl font-bold text-blue-800">VistaHaven</span>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#" class="text-blue-800 hover:text-blue-600 transition-colors">Home</a>
+        <a href="#" class="text-blue-800 hover:text-blue-600 transition-colors">Hotels</a>
+        <a href="#" class="text-blue-800 hover:text-blue-600 transition-colors">Deals</a>
+        <a href="#" class="text-blue-800 hover:text-blue-600 transition-colors">Contact</a>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <button class="px-4 py-2 text-sm text-blue-700 hover:text-blue-600 transition-colors">Sign In</button>
+        <button class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
+          Register
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-24">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0" @fadeIn>
+      <img
+        src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt=""
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-blue-50/90 via-white/70 to-white/80"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-4xl mx-auto text-center mb-16" @fadeInUp>
+        <h1 class="text-4xl md:text-6xl font-bold text-blue-900 mb-6 tracking-tight" @pulse>
+          Welcome to Your Dream Getaway
+        </h1>
+        <p class="text-xl text-blue-700">
+          Discover amazing hotels at unbeatable prices
+        </p>
+      </div>
+
+      <!-- Search Form -->
+      <div class="max-w-5xl mx-auto" @bounce>
+        <form [formGroup]="searchForm" class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-blue-100">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="relative">
+              <label class="block text-sm font-medium text-blue-700 mb-2">Destination</label>
+              <input
+                type="text"
+                formControlName="destination"
+                class="w-full bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 text-blue-900 placeholder-blue-400 focus:outline-none focus:border-blue-500 transition-colors"
+                placeholder="Where are you going?"
+              >
+            </div>
+
+            <div class="relative">
+              <label class="block text-sm font-medium text-blue-700 mb-2">Check In</label>
+              <input
+                type="date"
+                formControlName="checkIn"
+                class="w-full bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 text-blue-900 focus:outline-none focus:border-blue-500 transition-colors"
+              >
+            </div>
+
+            <div class="relative">
+              <label class="block text-sm font-medium text-blue-700 mb-2">Check Out</label>
+              <input
+                type="date"
+                formControlName="checkOut"
+                class="w-full bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 text-blue-900 focus:outline-none focus:border-blue-500 transition-colors"
+              >
+            </div>
+
+            <div class="relative">
+              <label class="block text-sm font-medium text-blue-700 mb-2">Guests</label>
+              <select
+                formControlName="guests"
+                class="w-full bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 text-blue-900 focus:outline-none focus:border-blue-500 transition-colors"
+              >
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5+ Guests</option>
+              </select>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full mt-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-4 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg shadow-blue-300"
+          >
+            Search Hotels
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-gradient-to-b from-white to-blue-50 backdrop-blur-sm">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-blue-900 text-center mb-12" @fadeIn>Featured Hotels</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Grand Plaza Hotel Card -->
+      <div class="group relative" @flipIn>
+        <div class="relative overflow-hidden rounded-xl">
+          <img
+            src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            alt="Luxury Hotel"
+            class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
+          >
+          <div class="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
+          <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg shadow-blue-300">
+            Featured
+          </div>
+        </div>
+
+        <div class="p-6 bg-white shadow-xl rounded-b-xl border border-blue-100">
+          <h3 class="text-xl font-bold text-blue-900 mb-2">Grand Plaza Hotel</h3>
+          <div class="flex items-center mb-2">
+            <div class="flex">
+              <ng-container *ngFor="let _ of [1,2,3,4,5]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+              </ng-container>
+            </div>
+            <span class="ml-2 text-sm text-blue-500">(128 reviews)</span>
+          </div>
+          <p class="text-blue-800 text-sm mb-4">Luxury hotel with stunning city views and world-class amenities</p>
+          <div class="flex items-center justify-between">
+            <span class="text-2xl font-bold text-blue-900">$299<span class="text-sm text-blue-500">/night</span></span>
+            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-300">
+              Book Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seaside Resort Card -->
+      <div class="group relative" @flipIn>
+        <div class="relative overflow-hidden rounded-xl">
+          <img
+            src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            alt="Seaside Resort"
+            class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
+          >
+          <div class="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
+          <div class="absolute top-4 right-4 bg-rose-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg shadow-rose-300">
+            25% OFF
+          </div>
+        </div>
+
+        <div class="p-6 bg-white shadow-xl rounded-b-xl border border-blue-100">
+          <h3 class="text-xl font-bold text-blue-900 mb-2">Seaside Resort & Spa</h3>
+          <div class="flex items-center mb-2">
+            <div class="flex">
+              <ng-container *ngFor="let _ of [1,2,3,4,5]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+              </ng-container>
+            </div>
+            <span class="ml-2 text-sm text-blue-500">(256 reviews)</span>
+          </div>
+          <p class="text-blue-800 text-sm mb-4">Beachfront paradise with private infinity pool and spa services</p>
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-2xl font-bold text-blue-900">$399</span>
+              <span class="text-sm text-blue-400 line-through ml-2">$499</span>
+              <span class="text-sm text-blue-500">/night</span>
+            </div>
+            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-300">
+              Book Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alpine Mountain Lodge Card -->
+      <div class="group relative" @flipIn>
+        <div class="relative overflow-hidden rounded-xl">
+          <img
+            src="https://images.unsplash.com/photo-1585543805890-6051f7829f98?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            alt="Mountain Lodge"
+            class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
+          >
+          <div class="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
+          <div class="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg shadow-emerald-300">
+            Eco-Friendly
+          </div>
+        </div>
+
+        <div class="p-6 bg-white shadow-xl rounded-b-xl border border-blue-100">
+          <h3 class="text-xl font-bold text-blue-900 mb-2">Alpine Mountain Lodge</h3>
+          <div class="flex items-center mb-2">
+            <div class="flex">
+              <ng-container *ngFor="let _ of [1,2,3,4]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+              </ng-container>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            </div>
+            <span class="ml-2 text-sm text-blue-500">(89 reviews)</span>
+          </div>
+          <p class="text-blue-800 text-sm mb-4">Sustainable mountain retreat with panoramic views and hiking trails</p>
+          <div class="flex items-center justify-between">
+            <span class="text-2xl font-bold text-blue-900">$249<span class="text-sm text-blue-500">/night</span></span>
+            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-300">
+              Book Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desert Oasis Resort Card -->
+      <div class="group relative" @flipIn>
+        <div class="relative overflow-hidden rounded-xl">
+          <img
+            src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            alt="Desert Oasis"
+            class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
+          >
+          <div class="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
+          <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg shadow-blue-300">
+            Luxury
+          </div>
+        </div>
+
+        <div class="p-6 bg-white shadow-xl rounded-b-xl border border-blue-100">
+          <h3 class="text-xl font-bold text-blue-900 mb-2">Desert Oasis Resort</h3>
+          <div class="flex items-center mb-2">
+            <div class="flex">
+              <ng-container *ngFor="let _ of [1,2,3,4,5]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+              </ng-container>
+            </div>
+            <span class="ml-2 text-sm text-blue-500">(167 reviews)</span>
+          </div>
+          <p class="text-blue-800 text-sm mb-4">Luxurious desert retreat with private pools and stargazing deck</p>
+          <div class="flex items-center justify-between">
+            <span class="text-2xl font-bold text-blue-900">$599<span class="text-sm text-blue-500">/night</span></span>
+            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-300">
+              Book Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Urban Boutique Card -->
+      <div class="group relative" @flipIn>
+        <div class="relative overflow-hidden rounded-xl">
+          <img
+            src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            alt="Urban Boutique"
+            class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
+          >
+          <div class="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
+          <div class="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg shadow-purple-300">
+            Boutique
+          </div>
+        </div>
+
+        <div class="p-6 bg-white shadow-xl rounded-b-xl border border-blue-100">
+          <h3 class="text-xl font-bold text-blue-900 mb-2">The Urban Boutique</h3>
+          <div class="flex items-center mb-2">
+            <div class="flex">
+              <ng-container *ngFor="let _ of [1,2,3,4,5]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+              </ng-container>
+            </div>
+            <span class="ml-2 text-sm text-blue-500">(143 reviews)</span>
+          </div>
+          <p class="text-blue-800 text-sm mb-4">Stylish city hotel with rooftop bar and artistic design with royal heritage </p>
+          <div class="flex items-center justify-between">
+            <span class="text-2xl font-bold text-blue-900">$349<span class="text-sm text-blue-500">/night</span></span>
+            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-300">
+              Book Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Royal Palace Hotel Card -->
+      <div class="group relative" @flipIn>
+        <div class="relative overflow-hidden rounded-xl">
+          <img
+            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            alt="Historic Palace"
+            class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
+          >
+          <div class="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
+          <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg shadow-blue-300">
+            Heritage
+          </div>
+        </div>
+
+        <div class="p-6 bg-white shadow-xl rounded-b-xl border border-blue-100">
+          <h3 class="text-xl font-bold text-blue-900 mb-2">Royal Palace Hotel</h3>
+          <div class="flex items-center mb-2">
+            <div class="flex">
+              <ng-container *ngFor="let _ of [1,2,3,4,5]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+              </ng-container>
+            </div>
+            <span class="ml-2 text-sm text-blue-500">(198 reviews)</span>
+          </div>
+          <p class="text-blue-800 text-sm mb-4">Historic palace converted into a luxury hotel with royal heritage</p>
+          <div class="flex items-center justify-between">
+            <span class="text-2xl font-bold text-blue-900">$799<span class="text-sm text-blue-500">/night</span></span>
+            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-300">
+              Book Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- See More Button -->
+    <div class="flex justify-center mt-12">
+<button class="group px-6 py-3 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg transition-all duration-300 flex items-center gap-2 border border-blue-300 hover:border-blue-500">
+See More Hotels
+<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+</svg>
+</button>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full z-50 bg-white/90 backdrop-blur-lg border-b border-blue-100 shadow-sm">
+<div class="container mx-auto px-4 py-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+  <div class="flex items-center space-x-2 mb-6">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    </svg>
+    <span class="text-2xl font-bold text-gray-800">StayVista</span>
+  </div>
+  <p class="text-gray-600 mb-4">Find your perfect stay with our curated selection of premium hotels and resorts worldwide.</p>
+  <div class="flex space-x-4">
+    <a href="#" class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+      </svg>
+    </a>
+    <a href="#" class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+      </svg>
+    </a>
+    <a href="#" class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<div>
+  <h3 class="text-lg font-semibold text-gray-800 mb-4">Quick Links</h3>
+  <ul class="space-y-2">
+    <li><a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">About Us</a></li>
+    <li><a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">Contact</a></li>
+    <li><a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">FAQ</a></li>
+    <li><a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">Terms & Conditions</a></li>
+  </ul>
+</div>
+
+<div>
+  <h3 class="text-lg font-semibold text-gray-800 mb-4">Contact Info</h3>
+  <ul class="space-y-2">
+    <li class="text-gray-600">1234 Hotel Street</li>
+    <li class="text-gray-600">New York, NY 10001</li>
+    <li class="text-gray-600">Phone: (555) 123-4567</li>
+    <li class="text-gray-600">Email: info<span class="ai-gmail"></span>.com</li>
+  </ul>
+</div>
+
+<div>
+  <h3 class="text-lg font-semibold text-gray-800 mb-4">Newsletter</h3>
+  <p class="text-gray-600 mb-4">Subscribe to our newsletter for special offers and updates.</p>
+  <form class="flex gap-2">
+    <input
+      type="email"
+      placeholder="Enter your email"
+      class="flex-1 px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:border-blue-500"
+    >
+    <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+      Subscribe
+    </button>
+  </form>
+</div>
+</div>
+
+<div class="mt-12 pt-8 border-t border-gray-200 text-center text-gray-500">
+<p>&copy; 2024 StayVista. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</div>
