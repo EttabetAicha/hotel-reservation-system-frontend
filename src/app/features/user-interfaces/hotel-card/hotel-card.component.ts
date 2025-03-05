@@ -1,0 +1,221 @@
+import { Component, EventEmitter, Input, Output } from "@angular/core"
+import { CommonModule } from "@angular/common"
+import { Hotel } from "../../../core/models/hotel.interface"
+
+
+
+@Component({
+  selector: 'app-hotel-card',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div
+      *ngIf="viewMode === 'grid'"
+      class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 relative"
+    >
+      <div class="relative">
+        <img
+          [src]="hotel.image"
+          [alt]="hotel.name"
+          class="w-full h-48 object-cover"
+        />
+        <button
+          (click)="onToggleFavorite()"
+          class="absolute top-3 right-3 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            [class.text-red-500]="hotel.isFavorite"
+            [class.text-gray-400]="!hotel.isFavorite"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </button>
+
+        <div *ngIf="hotel.discount" class="absolute top-3 left-3 bg-red-500 text-white px-2 py-1 rounded-md text-sm font-bold">
+          {{ hotel.discount }}% OFF
+        </div>
+
+        <div class="absolute bottom-3 left-3 flex">
+          <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
+            <svg
+              *ngIf="i <= hotel.stars"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-amber-500"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="p-4">
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="text-lg font-bold">{{ hotel.name }}</h3>
+          <div class="flex items-center bg-blue-600 text-white px-2 py-1 rounded text-sm">
+            <span class="font-bold mr-1">{{ hotel.rating }}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="flex items-center text-gray-600 mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span class="text-sm">{{ hotel.location }}</span>
+          <span class="mx-2">•</span>
+          <span class="text-sm">{{ hotel.distance }}</span>
+        </div>
+
+        <div class="flex flex-wrap gap-1 mb-4">
+          <span
+            *ngFor="let amenity of hotel.amenities.slice(0, 3)"
+            class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs"
+          >
+            {{ amenity }}
+          </span>
+          <span
+            *ngIf="hotel.amenities.length > 3"
+            class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs"
+          >
+            +{{ hotel.amenities.length - 3 }} more
+          </span>
+        </div>
+
+        <div class="flex justify-between items-end">
+          <div>
+            <div class="flex items-center">
+              <span *ngIf="hotel.originalPrice" class="text-sm line-through text-gray-500 mr-2">{{ hotel.originalPrice }}</span>
+              <span class="text-xl font-bold">{{ hotel.price }}</span>
+            </div>
+            <div class="text-xs text-gray-500">per night</div>
+          </div>
+          <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300">
+            View Deal
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- List view card -->
+    <div
+      *ngIf="viewMode === 'list'"
+      class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 relative"
+    >
+      <div class="flex flex-col md:flex-row">
+        <div class="md:w-1/3 relative">
+          <img
+            [src]="hotel.image"
+            [alt]="hotel.name"
+            class="w-full h-48 md:h-full object-cover"
+          />
+          <button
+            (click)="onToggleFavorite()"
+            class="absolute top-3 right-3 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              [class.text-red-500]="hotel.isFavorite"
+              [class.text-gray-400]="!hotel.isFavorite"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </button>
+
+          <div *ngIf="hotel.discount" class="absolute top-3 left-3 bg-red-500 text-white px-2 py-1 rounded-md text-sm font-bold">
+            {{ hotel.discount }}% OFF
+          </div>
+
+          <div class="absolute bottom-3 left-3 flex">
+            <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
+              <svg
+                *ngIf="i <= hotel.stars"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-amber-500"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="md:w-2/3 p-4 flex flex-col">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-bold">{{ hotel.name }}</h3>
+            <div class="flex items-center bg-teal-600 text-white px-2 py-1 rounded text-sm">
+              <span class="font-bold mr-1">{{ hotel.rating }}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="flex items-center text-gray-600 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span class="text-sm">{{ hotel.location }}</span>
+            <span class="mx-2">•</span>
+            <span class="text-sm">{{ hotel.distance }}</span>
+          </div>
+
+          <p class="text-gray-600 text-sm mb-3 line-clamp-2">{{ hotel.description }}</p>
+
+          <div class="flex flex-wrap gap-1 mb-4">
+            <span
+              *ngFor="let amenity of hotel.amenities.slice(0, 5)"
+              class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs"
+            >
+              {{ amenity }}
+            </span>
+            <span
+              *ngIf="hotel.amenities.length > 5"
+              class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs"
+            >
+              +{{ hotel.amenities.length - 5 }} more
+            </span>
+          </div>
+
+          <div class="flex justify-between items-end mt-auto">
+            <div>
+              <div class="flex items-center">
+                <span *ngIf="hotel.originalPrice" class="text-sm line-through text-gray-500 mr-2">{{ hotel.originalPrice }}</span>
+                <span class="text-xl font-bold">{{ hotel.price }}</span>
+              </div>
+              <div class="text-xs text-gray-500">per night</div>
+            </div>
+            <button class="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors duration-300">
+              View Deal
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `
+})
+export class HotelCardComponent {
+  @Input() hotel!: Hotel
+  @Input() viewMode: "grid" | "list" = "grid"
+  @Output() toggleFavorite = new EventEmitter<number>()
+
+  onToggleFavorite() {
+    this.toggleFavorite.emit(this.hotel.id)
+  }
+}
+
