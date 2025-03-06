@@ -2,6 +2,7 @@ import { HotelListingComponent } from './features/user-interfaces/hotel-list/hot
 import { Routes } from '@angular/router';
 import { LandingPageComponent } from './features/user-interfaces/landing-page/landing-page.component';
 import { AuthComponent } from './features/auth/auth.component';
+import { HotelDetailComponent } from './features/user-interfaces/hotel-details/hotel-details.component';
 
 export const routes: Routes = [
   {
@@ -17,5 +18,9 @@ export const routes: Routes = [
   {
     path:'hotel-list',
     component: HotelListingComponent
-  }
+  },
+  {
+    path: "hotel-details/:id",
+    component: HotelDetailComponent,
+  },
 ];
