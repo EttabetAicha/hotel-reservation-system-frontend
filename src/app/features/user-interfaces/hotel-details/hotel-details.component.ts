@@ -1,4 +1,4 @@
-import { Component, Input, type OnInit } from "@angular/core"
+import { Component, Input, input, type OnInit } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
 import { ActivatedRoute, Router } from "@angular/router"
@@ -8,6 +8,7 @@ import { FooterComponent } from "../footer/footer.component"
 import type { Hotel } from "../../../core/models/hotel.interface"
 import type { Room } from "../../../core/models/room.interface"
 import type { Review } from "../../../core/models/review.interface"
+import { BookingStateService } from "../../../core/services/booking-state.service"
 
 @Component({
   selector: "app-hotel-detail",
@@ -64,8 +65,8 @@ import type { Review } from "../../../core/models/review.interface"
   templateUrl: "./hotel-details.component.html",
 })
 export class HotelDetailComponent implements OnInit {
-  @Input() hotel: Hotel | null = null;
-  @Input() hotelRooms: Room[] = [];
+  @Input() hotel: any;
+  @Input() hotelRooms: Room[] = []
 
   // Gallery images (based on the hotel)
   galleryImages: string[] = []
@@ -76,7 +77,7 @@ export class HotelDetailComponent implements OnInit {
   checkInDate = new Date().toISOString().split("T")[0]
   checkOutDate = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split("T")[0]
   guestCount = 2
-  selectedRoomType = 1
+  selectedRoomType = 0
 
   // Booking confirmation
   showBookingConfirmation = false
@@ -107,6 +108,7 @@ export class HotelDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private bookingStateService: BookingStateService,
   ) {}
 
   ngOnInit() {
@@ -233,7 +235,7 @@ export class HotelDetailComponent implements OnInit {
   loadAdditionalData() {
     // Generate gallery images
     this.galleryImages = [
-      this.hotel?.image || '',
+      this.hotel.image,
       "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1564501049412-61c2a3083791?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1200&auto=format&fit=crop",
@@ -255,7 +257,7 @@ export class HotelDetailComponent implements OnInit {
         title: "Exceptional stay with outstanding service",
         comment:
           "We had an amazing experience at " +
-          this.hotel?.name +
+          this.hotel.name +
           ". The staff was incredibly attentive and the facilities were top-notch. The room was spacious, clean, and had a breathtaking view of the city. The breakfast buffet offered a wide variety of delicious options.",
         pros: "Excellent location, friendly staff, comfortable beds",
         cons: "Parking was a bit expensive",
@@ -351,6 +353,11 @@ export class HotelDetailComponent implements OnInit {
   }
 
   bookNow() {
+    if (!this.selectedRoomType) {
+      alert("Please select a room to continue.")
+      return
+    }
+
     const selectedRoom = this.getSelectedRoom()
 
     if (!selectedRoom) {
@@ -378,8 +385,11 @@ export class HotelDetailComponent implements OnInit {
       bookingDate: new Date().toISOString().split("T")[0],
     }
 
-    // Show booking confirmation
-    this.showBookingConfirmation = true
+    // Store booking details in the service
+    this.bookingStateService.setBookingDetails(this.bookingDetails)
+
+    // Navigate directly to payment page
+    this.proceedToPayment()
   }
 
   closeBookingConfirmation() {
@@ -387,13 +397,10 @@ export class HotelDetailComponent implements OnInit {
   }
 
   proceedToPayment() {
-    // In a real app, this would navigate to a payment page
-    this.router.navigate(["/payment"], {
-      state: {
-        bookingDetails: this.bookingDetails,
-      },
-    })
+    // Navigate to payment page
+    this.router.navigate(["/payment"])
   }
+
   selectRoom(roomId: number) {
     this.selectedRoomType = roomId
     // Scroll to booking widget for better UX
