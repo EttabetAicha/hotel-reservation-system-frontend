@@ -103,12 +103,12 @@ export class PaymentComponent implements OnInit {
       script.type = "text/javascript"
       script.src = "https://js.stripe.com/v3/"
       script.onload = () => {
-        this.stripe = Stripe("pk_test_your_publishable_key") // Replace with your actual publishable key
+        this.stripe = Stripe("pk_test_51OgSUzCvwqwJehZs0WMZBnSXxZkAb8xWCY94HnqIGK8fUwFDUVb1IHcVrcxWgoVm8VGMGGkunfombZWj7DtPhm56004kgSDWb8")
         this.initializeStripe()
       }
       window.document.body.appendChild(script)
     } else {
-      this.stripe = Stripe("pk_test_your_publishable_key") // Replace with your actual publishable key
+      this.stripe = Stripe("pk_test_51OgSUzCvwqwJehZs0WMZBnSXxZkAb8xWCY94HnqIGK8fUwFDUVb1IHcVrcxWgoVm8VGMGGkunfombZWj7DtPhm56004kgSDWb8")
       this.initializeStripe()
     }
   }
@@ -117,7 +117,6 @@ export class PaymentComponent implements OnInit {
     if (this.stripe && this.cardElement) {
       const elements = this.stripe.elements()
 
-      // Create card element
       this.card = elements.create("card", {
         style: {
           base: {
