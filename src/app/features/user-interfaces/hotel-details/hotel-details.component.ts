@@ -394,5 +394,15 @@ export class HotelDetailComponent implements OnInit {
       },
     })
   }
+  selectRoom(roomId: number) {
+    this.selectedRoomType = roomId
+    // Scroll to booking widget for better UX
+    setTimeout(() => {
+      const bookingWidget = document.getElementById("booking-widget")
+      if (bookingWidget) {
+        bookingWidget.scrollIntoView({ behavior: "smooth", block: "center" })
+      }
+    }, 100)
+  }
 }
 
