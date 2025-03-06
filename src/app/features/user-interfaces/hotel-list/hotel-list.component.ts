@@ -7,6 +7,7 @@ import type { Hotel } from "../../../core/models/hotel.interface"
 import { NavbarComponent } from "../navbar/navbar.component"
 import { FooterComponent } from "../footer/footer.component"
 import { trigger, transition, style, animate, query, stagger } from "@angular/animations"
+import { HotelDetailComponent } from "../hotel-details/hotel-details.component"
 
 interface FilterOptions {
   priceRange: [number, number]
@@ -15,10 +16,30 @@ interface FilterOptions {
   distance?: string
 }
 
+interface Room {
+  id: number
+  name: string
+  price: number
+  originalPrice?: number
+  discount?: number
+  image: string
+  capacity: number
+  features: string[]
+  description: string
+}
+
 @Component({
   selector: "app-hotel-listing",
   standalone: true,
-  imports: [CommonModule, FormsModule, HotelCardComponent, FilterSidebarComponent, NavbarComponent, FooterComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HotelCardComponent,
+    FilterSidebarComponent,
+    NavbarComponent,
+    FooterComponent,
+    HotelDetailComponent,
+  ],
   animations: [
     trigger("fadeIn", [transition(":enter", [style({ opacity: 0 }), animate("400ms ease-in", style({ opacity: 1 }))])]),
     trigger("staggerIn", [
@@ -45,19 +66,38 @@ interface FilterOptions {
   <div class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-rose-50">
     <app-navbar></app-navbar>
 
+    <div *ngIf="showHotelDetails && selectedHotel" class="relative">
+      <button
+        (click)="closeHotelDetails()"
+        class="absolute right-4 top-4 z-50 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors duration-200"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <app-hotel-detail
+        [hotel]="selectedHotel"
+        [hotelRooms]="generateRoomsForHotel(selectedHotel)"
+      ></app-hotel-detail>
+    </div>
+
     <div class="relative">
       <!-- Hero Section -->
       <div class="relative h-[40vh] md:h-[50vh] overflow-hidden">
-
-        <div style="background-image: url('https://images.unsplash.com/photo-1445019980597-93fa8acb246c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center;"
-        class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white p-4">
+        <img
+          src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2000&auto=format&fit=crop"
+          alt="Luxury hotel view"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white p-4">
           <h1 class="text-3xl md:text-5xl font-bold mb-4 text-center animate-fade-in-down">Find Your Perfect Stay</h1>
           <p class="text-lg md:text-xl max-w-2xl text-center mb-8 animate-fade-in-up">Discover amazing hotels and accommodations for your next adventure</p>
           <div class="relative w-full max-w-2xl animate-fade-in">
             <input
               type="text"
               placeholder="Search destinations, hotels, or attractions..."
-              class="w-full pl-12 pr-4 py-4 rounded-full border-0 shadow-lg text-white  focus:ring-2 focus:ring-indigo-500"
+              class="w-full pl-12 pr-4 py-4 rounded-full border-0 shadow-lg text-gray-800 focus:ring-2 focus:ring-indigo-500"
               [(ngModel)]="searchQuery"
               (input)="applyFilters()"
             />
@@ -184,6 +224,7 @@ interface FilterOptions {
                 [hotel]="hotel"
                 [viewMode]="viewMode"
                 (toggleFavorite)="toggleFavorite($event)"
+                (viewHotelDetails)="viewHotelDetails(hotel.id)"
               ></app-hotel-card>
             </div>
 
@@ -194,6 +235,7 @@ interface FilterOptions {
                 [hotel]="hotel"
                 [viewMode]="viewMode"
                 (toggleFavorite)="toggleFavorite($event)"
+                (viewHotelDetails)="viewHotelDetails(hotel.id)"
               ></app-hotel-card>
             </div>
 
@@ -275,6 +317,8 @@ export class HotelListingComponent implements OnInit {
   showMobileFilter = false
   searchQuery = ""
   sortOption = "recommended"
+  selectedHotel: Hotel | null = null
+  showHotelDetails = false
 
   // Pagination
   currentPage = 1
@@ -529,6 +573,81 @@ export class HotelListingComponent implements OnInit {
     }
     this.searchQuery = ""
     this.applyFilters()
+  }
+
+  viewHotelDetails(hotelId: number) {
+    this.selectedHotel = this.hotels.find((hotel) => hotel.id === hotelId) || null
+    this.showHotelDetails = true
+
+    // Scroll to the top if details are shown
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  closeHotelDetails() {
+    this.showHotelDetails = false
+    this.selectedHotel = null
+  }
+
+  generateRoomsForHotel(hotel: Hotel | null): Room[] {
+    if (!hotel) return []
+
+    // Room images
+    const roomImages = [
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1200&auto=format&fit=crop",
+    ]
+
+    // Room features
+    const features = [
+      ["King Bed", "City View", "Free WiFi", "Minibar", "Air Conditioning", "Flat-screen TV"],
+      [
+        "King Bed",
+        "Separate Living Area",
+        "City View",
+        "Free WiFi",
+        "Minibar",
+        "Air Conditioning",
+        "Flat-screen TV",
+        "Bathtub",
+      ],
+      ["Two Double Beds", "City View", "Free WiFi", "Minibar", "Air Conditioning", "Flat-screen TV"],
+    ]
+
+    // Generate rooms based on the hotel
+    return [
+      {
+        id: 1,
+        name: "Deluxe King Room",
+        price: Math.floor(hotel.price * 1),
+        originalPrice: hotel.originalPrice ? Math.floor(hotel.originalPrice * 1) : undefined,
+        discount: hotel.discount,
+        image: roomImages[0],
+        capacity: 2,
+        features: features[0],
+        description: "Spacious room with a king-sized bed, featuring modern amenities and a stunning city view.",
+      },
+      {
+        id: 2,
+        name: "Executive Suite",
+        price: Math.floor(hotel.price * 1.5),
+        image: roomImages[1],
+        capacity: 3,
+        features: features[1],
+        description: "Luxurious suite with a separate living area, perfect for business travelers or small families.",
+      },
+      {
+        id: 3,
+        name: "Premium Double Room",
+        price: Math.floor(hotel.price * 1.1),
+        originalPrice: hotel.originalPrice ? Math.floor(hotel.originalPrice * 1.1) : undefined,
+        discount: hotel.discount,
+        image: roomImages[2],
+        capacity: 4,
+        features: features[2],
+        description: "Comfortable room with two double beds, ideal for families or groups.",
+      },
+    ]
   }
 }
 
