@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone } from "@angular/core"
+import { Component, type OnInit, ViewChild, type ElementRef, NgZone } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
 import { Router, RouterLink } from "@angular/router"
@@ -6,13 +6,15 @@ import { NavbarComponent } from "../navbar/navbar.component"
 import { FooterComponent } from "../footer/footer.component"
 import { trigger, transition, style, animate } from "@angular/animations"
 import { HttpClient } from "@angular/common/http"
+import { BookingService } from "../../../core/services/booking.service"
+import { BookingStateService } from "../../../core/services/booking-state.service"
 
 declare var Stripe: any
 
 @Component({
   selector: "app-payment",
   standalone: true,
-  imports: [CommonModule, FormsModule, NavbarComponent,RouterLink, FooterComponent],
+  imports: [CommonModule, FormsModule, NavbarComponent, FooterComponent,RouterLink],
   animations: [
     trigger("fadeIn", [transition(":enter", [style({ opacity: 0 }), animate("400ms ease-in", style({ opacity: 1 }))])]),
     trigger("slideInUp", [
@@ -35,6 +37,7 @@ export class PaymentComponent implements OnInit {
   paymentMethod: "card" | "paypal" | "bank-transfer" = "card"
   isProcessing = false
   paymentComplete = false
+  bookingId = ""
 
   // Customer information
   email = ""
@@ -52,16 +55,36 @@ export class PaymentComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private zone: NgZone,
+    private bookingService: BookingService,
+    private bookingStateService: BookingStateService,
   ) {}
 
   ngOnInit() {
-    const navigation = this.router.getCurrentNavigation()
-    if (navigation?.extras.state) {
-      this.bookingDetails = navigation.extras.state["bookingDetails"]
+    // Try to get booking details from the service first
+    this.bookingDetails = this.bookingStateService.getBookingDetails()
+
+    // If not available in service, try to get from router state
+    if (!this.bookingDetails) {
+      const navigation = this.router.getCurrentNavigation()
+      if (navigation?.extras?.state) {
+        this.bookingDetails = navigation.extras.state["bookingDetails"]
+      }
     }
 
+    // If still no booking details, redirect to hotel list
     if (!this.bookingDetails) {
+      console.error("No booking details received")
       this.router.navigate(["/hotel-list"])
+      return
+    }
+
+    console.log("Booking details loaded:", this.bookingDetails)
+
+    // Validate that we have booking details with a selected room
+    if (!this.bookingDetails.room) {
+      console.error("Invalid booking details - missing room information")
+      this.router.navigate(["/hotel-list"])
+      return
     }
 
     // Load Stripe.js
@@ -204,6 +227,7 @@ export class PaymentComponent implements OnInit {
             (response: any) => {
               // Handle successful payment
               this.zone.run(() => {
+                this.addBookingToHistory()
                 this.isProcessing = false
                 this.paymentComplete = true
               })
@@ -220,6 +244,7 @@ export class PaymentComponent implements OnInit {
         // For demo purposes, simulate a successful payment
         setTimeout(() => {
           this.zone.run(() => {
+            this.addBookingToHistory()
             this.isProcessing = false
             this.paymentComplete = true
           })
@@ -233,6 +258,7 @@ export class PaymentComponent implements OnInit {
       // For demo purposes, simulate a successful payment
       setTimeout(() => {
         this.zone.run(() => {
+          this.addBookingToHistory()
           this.isProcessing = false
           this.paymentComplete = true
         })
@@ -240,8 +266,39 @@ export class PaymentComponent implements OnInit {
     }
   }
 
-  returnToBookings() {
+  addBookingToHistory() {
+    // Create a booking record
+    const booking = {
+      id: this.bookingDetails.bookingId,
+      hotelId: this.bookingDetails.hotel.id,
+      hotelName: this.bookingDetails.hotel.name,
+      hotelImage: this.bookingDetails.hotel.image,
+      roomName: this.bookingDetails.room.name,
+      checkIn: this.bookingDetails.checkIn,
+      checkOut: this.bookingDetails.checkOut,
+      guests: this.bookingDetails.guests,
+      totalAmount: this.bookingDetails.total,
+      status: "upcoming" as "upcoming" | "completed" | "cancelled",
+      bookingDate: this.bookingDetails.bookingDate,
+      paymentMethod:
+        this.paymentMethod === "card" ? "Credit Card" : this.paymentMethod === "paypal" ? "PayPal" : "Bank Transfer",
+    }
+
+    this.bookingService.addBooking(booking).subscribe((result) => {
+      this.bookingId = result.id
+    })
+  }
+
+  viewBookings() {
     this.router.navigate(["/bookings"])
+  }
+
+  viewBookingDetails() {
+    if (this.bookingId) {
+      this.router.navigate(["/booking-details", this.bookingId])
+    } else {
+      this.router.navigate(["/bookings"])
+    }
   }
 }
 
