@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core"
-import { CommonModule } from "@angular/common"
-import { Hotel } from "../../../core/models/hotel.interface"
-
-
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Hotel } from "../../../core/models/hotel.interface";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-hotel-card',
@@ -99,7 +98,7 @@ import { Hotel } from "../../../core/models/hotel.interface"
             </div>
             <div class="text-xs text-gray-500">per night</div>
           </div>
-          <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300">
+          <button (click)="onViewDetails()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300">
             View Deal
           </button>
         </div>
@@ -109,7 +108,7 @@ import { Hotel } from "../../../core/models/hotel.interface"
     <!-- List view card -->
     <div
       *ngIf="viewMode === 'list'"
-      class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 relative"
+      class="bg-white rounded-xl m-5 overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 relative"
     >
       <div class="flex flex-col md:flex-row">
         <div class="md:w-1/3 relative">
@@ -157,7 +156,7 @@ import { Hotel } from "../../../core/models/hotel.interface"
         <div class="md:w-2/3 p-4 flex flex-col">
           <div class="flex justify-between items-start mb-2">
             <h3 class="text-lg font-bold">{{ hotel.name }}</h3>
-            <div class="flex items-center bg-teal-600 text-white px-2 py-1 rounded text-sm">
+            <div class="flex items-center bg-yellow-500 text-white px-2 py-1 rounded text-sm">
               <span class="font-bold mr-1">{{ hotel.rating }}</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -200,7 +199,7 @@ import { Hotel } from "../../../core/models/hotel.interface"
               </div>
               <div class="text-xs text-gray-500">per night</div>
             </div>
-            <button class="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors duration-300">
+            <button (click)="onViewDetails()" class="px-4 py-2 bg-blue-400 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300">
               View Deal
             </button>
           </div>
@@ -210,12 +209,16 @@ import { Hotel } from "../../../core/models/hotel.interface"
   `
 })
 export class HotelCardComponent {
-  @Input() hotel!: Hotel
-  @Input() viewMode: "grid" | "list" = "grid"
-  @Output() toggleFavorite = new EventEmitter<number>()
+  @Input() hotel!: Hotel;
+  @Input() viewMode: "grid" | "list" = "grid";
+  @Output() toggleFavorite = new EventEmitter<number>();
+  @Output() viewHotelDetails = new EventEmitter<number>();
+  constructor(private router: Router) {}
+
+  onViewDetails() {
+    this.router.navigate(["/hotel-details", this.hotel.id])  }
 
   onToggleFavorite() {
-    this.toggleFavorite.emit(this.hotel.id)
+    this.toggleFavorite.emit(this.hotel.id);
   }
 }
-
