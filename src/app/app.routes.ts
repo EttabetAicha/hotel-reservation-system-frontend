@@ -4,6 +4,8 @@ import { LandingPageComponent } from './features/user-interfaces/landing-page/la
 import { AuthComponent } from './features/auth/auth.component';
 import { HotelDetailComponent } from './features/user-interfaces/hotel-details/hotel-details.component';
 import { PaymentComponent } from './features/user-interfaces/payment/payment.component';
+import { BookingsComponent } from './features/user-interfaces/booking/booking.component';
+import { BookingDetailsComponent } from './features/user-interfaces/booking-details/booking-details.component';
 
 export const routes: Routes = [
   {
@@ -30,7 +32,10 @@ export const routes: Routes = [
   },
   {
     path: "bookings",
-    redirectTo: "/hotel-list",
-    pathMatch: "full",
+    component: BookingsComponent,
+  },
+  {
+    path: "booking-details/:id",
+    component: BookingDetailsComponent,
   },
 ];
