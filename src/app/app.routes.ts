@@ -6,6 +6,12 @@ import { HotelDetailComponent } from './features/user-interfaces/hotel-details/h
 import { PaymentComponent } from './features/user-interfaces/payment/payment.component';
 import { BookingsComponent } from './features/user-interfaces/booking/booking.component';
 import { BookingDetailsComponent } from './features/user-interfaces/booking-details/booking-details.component';
+import { AdminLayoutComponent } from './features/admin/admin-layout/admin-layout.component';
+import { AdminDashboardComponent } from './features/admin/dashboard/dashboard.component';
+import { AdminHotelsComponent } from './features/admin/hotels/hotels.component';
+import { AdminRoomsComponent } from './features/admin/rooms/rooms.component';
+import { AdminBookingsComponent } from './features/admin/bookings/bookings.component';
+import { AdminNotificationsComponent } from './features/admin/notifications/notifications.component';
 
 export const routes: Routes = [
   {
@@ -37,5 +43,36 @@ export const routes: Routes = [
   {
     path: "booking-details/:id",
     component: BookingDetailsComponent,
+  },
+  {
+    path: "admin",
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: "",
+        redirectTo: "dashboard",
+        pathMatch: "full",
+      },
+      {
+        path: "dashboard",
+        component: AdminDashboardComponent,
+      },
+      {
+        path: "hotels",
+        component: AdminHotelsComponent,
+      },
+      {
+        path: "rooms",
+        component: AdminRoomsComponent,
+      },
+      {
+        path: "bookings",
+        component: AdminBookingsComponent,
+      },
+      {
+        path: "notifications",
+        component: AdminNotificationsComponent,
+      },
+    ],
   },
 ];
