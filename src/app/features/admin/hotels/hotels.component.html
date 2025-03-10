@@ -1,0 +1,189 @@
+<div class="container mx-auto">
+  <!-- Header -->
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800">Hotels</h1>
+      <p class="text-gray-600">Manage your hotel properties</p>
+    </div>
+    <div class="mt-4 md:mt-0 flex flex-col sm:flex-row gap-3">
+      <div class="relative">
+        <input
+          type="text"
+          placeholder="Search hotels..."
+          class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          [(ngModel)]="searchTerm"
+          (input)="filterHotels()"
+        >
+        <div class="absolute left-3 top-2.5 text-gray-400">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+      </div>
+      <button
+        (click)="openAddHotelModal()"
+        class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg flex items-center justify-center"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+        Add New Hotel
+      </button>
+    </div>
+  </div>
+
+  <!-- Hotel Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <div *ngFor="let hotel of filteredHotels" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <!-- Hotel Image -->
+      <div class="relative h-48">
+        <img [src]="hotel.image" [alt]="hotel.name" class="w-full h-full object-cover">
+        <div class="absolute top-2 right-2">
+          <span
+            [class]="getStatusBadgeClass(hotel.status)"
+            class="px-2 py-1 text-xs font-bold rounded-full uppercase"
+          >
+            {{ hotel.status }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Hotel Details -->
+      <div class="p-5">
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="text-lg font-bold text-gray-800">{{ hotel.name }}</h3>
+          <div class="flex">
+            <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
+              <svg
+                *ngIf="i <= hotel.stars"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 text-yellow-500"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="text-gray-600 mb-4">{{ hotel.location }}</div>
+
+        <div class="flex justify-between items-center mb-4">
+          <div class="text-sm text-gray-600">
+            <span class="font-medium">{{ hotel.rooms }}</span> Rooms
+          </div>
+          <div class="flex items-center bg-indigo-100 text-indigo-800 px-2 py-1 rounded">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+            <span class="font-bold">{{ hotel.rating }}</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex justify-between">
+          <button
+            (click)="viewHotelDetails(hotel.id)"
+            class="text-indigo-600 hover:text-indigo-800 font-medium text-sm"
+          >
+            View Details
+          </button>
+          <div class="flex space-x-2">
+            <button
+              (click)="editHotel(hotel)"
+              class="text-gray-600 hover:text-gray-800"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </button>
+            <button
+              (click)="openDeleteModal(hotel)"
+              class="text-red-600 hover:text-red-800"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="flex justify-center">
+    <nav class="flex items-center">
+      <button class="px-3 py-1 rounded-md mr-2 text-gray-600 hover:text-indigo-600 disabled:opacity-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button class="px-3 py-1 rounded-md mx-1 bg-indigo-600 text-white">1</button>
+      <button class="px-3 py-1 rounded-md mx-1 text-gray-600 hover:bg-indigo-100">2</button>
+      <button class="px-3 py-1 rounded-md mx-1 text-gray-600 hover:bg-indigo-100">3</button>
+      <button class="px-3 py-1 rounded-md ml-2 text-gray-600 hover:text-indigo-600">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div *ngIf="showDeleteModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex justify-between items-center">
+          <h2 class="text-lg font-bold text-gray-800">Confirm Deletion</h2>
+          <button (click)="showDeleteModal = false" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="p-6">
+        <div class="flex justify-center mb-6 text-red-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0016.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </div>
+        <p class="text-center text-gray-800 mb-4">Are you sure you want to delete <span class="font-bold">{{hotelToDelete?.name}}</span>?</p>
+        <p class="text-center text-gray-600 mb-6">This action cannot be undone.</p>
+        <div class="flex justify-center space-x-4">
+          <button
+            (click)="showDeleteModal = false"
+            class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+          >
+            Cancel
+          </button>
+          <button
+            (click)="confirmDelete()"
+            [disabled]="isDeleting"
+            class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50"
+          >
+            <span *ngIf="isDeleting" class="flex items-center">
+              <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Deleting...
+            </span>
+            <span *ngIf="!isDeleting">Delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hotel Add/Edit Modal -->
+  <app-hotel-modal
+    [isOpen]="showHotelModal"
+    [editMode]="hotelModalEditMode"
+    [hotelToEdit]="hotelToEdit"
+    (close)="closeHotelModal()"
+    (save)="saveHotel($event)"
+  ></app-hotel-modal>
+</div>

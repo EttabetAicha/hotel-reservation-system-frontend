@@ -1,0 +1,53 @@
+
+<aside
+[class.w-64]="!collapsed"
+[class.w-20]="collapsed"
+class="bg-indigo-800 text-white transition-all duration-300 ease-in-out h-full"
+>
+<!-- Logo -->
+<div class="flex items-center justify-center h-16 border-b border-indigo-700">
+  <div *ngIf="!collapsed" class="text-xl font-bold">Hotel Admin</div>
+  <div *ngIf="collapsed" class="text-xl font-bold">HA</div>
+</div>
+
+<!-- Navigation -->
+<nav class="mt-5 px-2">
+  <ng-container *ngFor="let item of navItems">
+    <a
+      [routerLink]="[item.route]"
+      routerLinkActive="bg-indigo-900"
+      class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-indigo-700 transition-colors duration-200"
+    >
+      <div [class.mr-3]="!collapsed" class="text-indigo-300">
+        <i [class]="item.icon"></i>
+      </div>
+      <span *ngIf="!collapsed" class="flex-1">{{ item.label }}</span>
+      <span
+        *ngIf="!collapsed && item.badge"
+        class="bg-indigo-100 text-indigo-800 ml-auto inline-block py-0.5 px-2 text-xs rounded-full"
+      >
+        {{ item.badge }}
+      </span>
+      <span
+        *ngIf="collapsed && item.badge"
+        class="absolute right-0 top-0 -mt-1 -mr-1 bg-indigo-100 text-indigo-800 py-0.5 px-2 text-xs rounded-full"
+      >
+        {{ item.badge }}
+      </span>
+    </a>
+  </ng-container>
+</nav>
+
+<!-- User Section -->
+<div class="absolute bottom-0 w-64 border-t border-indigo-700 p-4">
+  <div class="flex items-center" [class.justify-center]="collapsed">
+    <div class="flex-shrink-0">
+      <img class="h-10 w-10 rounded-full" src="https://media.licdn.com/dms/image/v2/D4E03AQH_D9aJqswZPQ/profile-displayphoto-shrink_400_400/B4EZR5YtPSGgAg-/0/1737203326415?e=1746662400&v=beta&t=D3rsyj5RduxZP_VFxa43h-FyQAnJMbAnYFNxrwsfBcI" alt="Admin user">
+    </div>
+    <div *ngIf="!collapsed" class="ml-3">
+      <p class="text-sm font-medium text-white">Admin User</p>
+      <a href="#" class="text-xs font-medium text-indigo-300 hover:text-indigo-100">View Profile</a>
+    </div>
+  </div>
+</div>
+</aside>
