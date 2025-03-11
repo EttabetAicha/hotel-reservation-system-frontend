@@ -12,6 +12,8 @@ import { AdminHotelsComponent } from './features/admin/hotels/hotels.component';
 import { AdminRoomsComponent } from './features/admin/rooms/rooms.component';
 import { AdminBookingsComponent } from './features/admin/bookings/bookings.component';
 import { AdminNotificationsComponent } from './features/admin/notifications/notifications.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { PublicGuard } from './core/guards/PublicGuard.guard';
 
 export const routes: Routes = [
   {
@@ -20,10 +22,20 @@ export const routes: Routes = [
   }
   ,
   {
-    path:'auth',
-    component: AuthComponent
-  }
-  ,
+    path: 'authentication',
+    canActivate:[PublicGuard],
+    component: AuthComponent,
+    children: [
+      {
+        path: 'login',
+        component: AuthComponent
+      },
+      {
+        path: 'register',
+        component: AuthComponent
+      }
+    ]
+  },
   {
     path:'hotel-list',
     component: HotelListingComponent
@@ -46,6 +58,7 @@ export const routes: Routes = [
   },
   {
     path: "admin",
+    canActivate:[AuthGuard],
     component: AdminLayoutComponent,
     children: [
       {
