@@ -15,10 +15,18 @@
     </div>
 
     <div class="flex items-center space-x-4">
-      <button routerLink="/auth" class="px-4 py-2 text-sm text-blue-700 hover:text-blue-600 transition-colors">Sign In</button>
-      <button class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
-        Register
-      </button>
+      <div *ngIf="userName; else loggedOut">
+        <span class="text-sm mx-5 text-blue-700">Welcome, {{ userName }}!</span>
+        <button (click)="logout()" class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
+          Log out
+        </button>
+      </div>
+      <ng-template #loggedOut>
+        <button routerLink="/authentication/login" class="px-4 py-2 text-sm text-blue-700 hover:text-blue-600 transition-colors">Sign In</button>
+        <button routerLink="/authentication/register" class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
+          Register
+        </button>
+      </ng-template>
     </div>
   </nav>
 </header>
