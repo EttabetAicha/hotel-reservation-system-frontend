@@ -112,6 +112,21 @@
           Password must be at least 6 characters
         </div>
 
+        <input
+          type="text"
+          formControlName="phone"
+          placeholder="Phone"
+          class="bg-gray-100 border-none py-3 px-4 my-2 w-full rounded"
+        />
+        <div
+          *ngIf="
+            signUpForm.get('phone')?.touched && signUpForm.get('phone')?.invalid
+          "
+          class="text-red-500 text-xs w-full text-left mt-1"
+        >
+          Phone is required
+        </div>
+
         <button
           type="submit"
           [disabled]="signUpForm.invalid"
