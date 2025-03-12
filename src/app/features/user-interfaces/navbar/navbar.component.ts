@@ -29,10 +29,7 @@ export class NavbarComponent implements OnInit {
     if (token) {
       try {
         const decodedToken: any = jwtDecode(token);
-        console.log('Decoded token:', decodedToken); // Add this to debug
-
-        // Check what property actually contains the username in your token
-        // It might not be 'username' but could be 'name', 'sub', etc.
+        console.log('Decoded token:', decodedToken); 
         this.userName = decodedToken.username || decodedToken.name || decodedToken.sub;
         console.log('Set username to:', this.userName);
       } catch (error) {

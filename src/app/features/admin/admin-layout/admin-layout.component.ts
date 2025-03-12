@@ -1,17 +1,17 @@
 import { Component, type OnInit } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { RouterModule } from "@angular/router"
-import { AdminSidebarComponent } from "../admin-sidebar/admin-sidebar.component"
 import { AdminHeaderComponent } from "../admin-header/admin-header.component"
+import { SidebarComponent } from "../admin-sidebar/admin-sidebar.component"
 
 @Component({
   selector: "app-admin-layout",
   standalone: true,
-  imports: [CommonModule, RouterModule, AdminSidebarComponent, AdminHeaderComponent],
+  imports: [CommonModule, RouterModule, SidebarComponent, AdminHeaderComponent],
   template: `
     <div class="flex h-screen bg-gray-100">
       <!-- Sidebar -->
-      <app-admin-sidebar [collapsed]="sidebarCollapsed"></app-admin-sidebar>
+      <app-sidebar [collapsed]="sidebarCollapsed"></app-sidebar>
 
       <!-- Main Content -->
       <div class="flex flex-col flex-1 overflow-hidden">

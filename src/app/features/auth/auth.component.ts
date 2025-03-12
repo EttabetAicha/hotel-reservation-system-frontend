@@ -6,6 +6,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { RegisterRequest } from '../../core/models/auth.interface';
 import Swal from 'sweetalert2';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-auth',
@@ -70,14 +71,27 @@ export class AuthComponent {
     if (this.signInForm.valid) {
       this.authService.login(this.signInForm.value).subscribe(
         response => {
-          console.log('Login successful:', response);
-          this.router.navigate(['/']).then(() => {
-            window.location.reload();
-          });
-        },
+          const token = localStorage.getItem('auth-token');
+          if (token) {
+            try {
+              const decodedToken: any = jwtDecode(token);
+              console.log('Decoded token:', decodedToken);
 
-        error => {
-          if(!this.signInForm)
+              if (decodedToken.role === 'ADMIN') {
+                this.router.navigate(['/admin']).then(() => {
+                  window.location.reload();
+                });
+              } else {
+                this.router.navigate(['/']).then(() => {
+                  window.location.reload();
+                });
+              }
+            } catch (error) {
+              console.error('Token decoding failed:', error);
+            }
+          }
+        },
+        (error: any) => {
           console.log('Swal.fire should be called now');
           Swal.fire({
             icon: 'error',

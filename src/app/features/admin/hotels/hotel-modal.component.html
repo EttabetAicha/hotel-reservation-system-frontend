@@ -1,0 +1,246 @@
+<div *ngIf="isOpen" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+       [class.animate-fadeIn]="isOpen"
+       (click)="$event.stopPropagation()">
+    <!-- Header -->
+    <div class="p-6 border-b border-gray-200">
+      <div class="flex justify-between items-center">
+        <h2 class="text-2xl font-bold text-gray-800">{{editMode ? 'Edit Hotel' : 'Add New Hotel'}}</h2>
+        <button (click)="closeModal()" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex border-b border-gray-200">
+      <button
+        type="button"
+        class="px-6 py-3 font-medium text-sm"
+        [class.tab-active]="activeTab === 'details'"
+        (click)="setActiveTab('details')"
+      >
+        Hotel Details
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="p-6">
+      <form (ngSubmit)="saveHotel()">
+        <!-- Hotel Details Tab -->
+        <div *ngIf="activeTab === 'details'">
+          <!-- Basic Information -->
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Basic Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label for="hotel-name" class="block text-sm font-medium text-gray-700 mb-1">Hotel Name*</label>
+                <input
+                  type="text"
+                  id="hotel-name"
+                  name="name"
+                  [(ngModel)]="hotelData.name"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                <div *ngIf="errors['name']" class="mt-1 text-sm text-red-600">{{errors['name']}}</div>
+              </div>
+
+              <div>
+                <label for="hotel-location" class="block text-sm font-medium text-gray-700 mb-1">Location*</label>
+                <input
+                  type="text"
+                  id="hotel-location"
+                  name="location"
+                  [(ngModel)]="hotelData.location"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                <div *ngIf="errors['location']" class="mt-1 text-sm text-red-600">{{errors['location']}}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Owner ID -->
+          <div class="mb-6">
+            <label for="hotel-owner-id" class="block text-sm font-medium text-gray-700 mb-1">Owner *</label>
+            <input
+             readonly
+              type="text"
+              id="hotel-owner-id"
+              name="ownerId"
+              [(ngModel)]="hotelData.ownerId"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+            <div *ngIf="errors['ownerId']" class="mt-1 text-sm text-red-600">{{errors['ownerId']}}</div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-6">
+            <label for="hotel-description" class="block text-sm font-medium text-gray-700 mb-1">Description*</label>
+            <textarea
+              id="hotel-description"
+              name="description"
+              [(ngModel)]="hotelData.description"
+              rows="4"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            ></textarea>
+            <div *ngIf="errors['description']" class="mt-1 text-sm text-red-600">{{errors['description']}}</div>
+          </div>
+
+          <!-- Image and Stars -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div>
+              <label for="hotel-images" class="block text-sm font-medium text-gray-700 mb-1">Image URLs*</label>
+              <div *ngFor="let image of hotelData.images; let i = index" class="flex items-center mb-2">
+                <input
+                  type="text"
+                  [id]="'hotel-image-' + i"
+                  name="images{{i}}"
+                  [(ngModel)]="hotelData.images[i]"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                <button type="button" (click)="removeImage(i)" class="ml-2 text-red-500 hover:text-red-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <button type="button" (click)="addImage()" class="mt-2 text-blue-500 hover:text-blue-700">
+                Add Image URL
+              </button>
+              <div *ngIf="errors['images']" class="mt-1 text-sm text-red-600">{{errors['images']}}</div>
+            </div>
+            <div>
+              <label for="hotel-stars" class="block text-sm font-medium text-gray-700 mb-1">Star Rating*</label>
+              <select
+                id="hotel-stars"
+                name="stars"
+                [(ngModel)]="hotelData.stars"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                <option [ngValue]="1">1 Star</option>
+                <option [ngValue]="2">2 Stars</option>
+                <option [ngValue]="3">3 Stars</option>
+                <option [ngValue]="4">4 Stars</option>
+                <option [ngValue]="5">5 Stars</option>
+              </select>
+              <div *ngIf="errors['stars']" class="mt-1 text-sm text-red-600">{{errors['stars']}}</div>
+            </div>
+          </div>
+
+          <!-- Status -->
+          <div class="mb-6">
+            <label for="hotel-status" class="block text-sm font-medium text-gray-700 mb-1">Status*</label>
+            <select
+              id="hotel-status"
+              name="status"
+              [(ngModel)]="hotelData.status"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              <option value="active">Active</option>
+              <option value="maintenance">Maintenance</option>
+              <option value="closed">Closed</option>
+            </select>
+            <div *ngIf="errors['status']" class="mt-1 text-sm text-red-600">{{errors['status']}}</div>
+          </div>
+
+          <!-- Amenities -->
+          <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Amenities</label>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div *ngFor="let amenity of availableAmenities" class="flex items-center">
+                <input
+                  type="checkbox"
+                  [id]="'amenity-' + amenity"
+                  [checked]="isAmenitySelected(amenity)"
+                  (change)="toggleAmenity(amenity)"
+                  class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                >
+                <label [for]="'amenity-' + amenity" class="ml-2 block text-sm text-gray-700">
+                  {{amenity}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview -->
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Preview</h3>
+            <div class="bg-gray-100 p-4 rounded-lg">
+              <div class="flex flex-col md:flex-row gap-4">
+                <div class="md:w-1/3">
+                  <img
+                    [src]="hotelData.images && hotelData.images.length > 0 ? hotelData.images[0] : 'https://via.placeholder.com/150'"
+                    alt="Hotel preview"
+                    class="w-full h-48 object-cover rounded-lg"
+                  >
+                </div>
+                <div class="md:w-2/3">
+                  <h4 class="text-xl font-bold text-gray-800">{{hotelData.name || 'Hotel Name'}}</h4>
+                  <div class="flex items-center mt-1 mb-2">
+                    <div class="flex">
+                      <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
+                        <svg
+                          *ngIf="i <= hotelData.stars"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 text-yellow-500"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      </ng-container>
+                    </div>
+                    <span class="ml-2 text-gray-600">{{hotelData.location || 'Location'}}</span>
+                  </div>
+                  <p class="text-gray-700">{{hotelData.description || 'Hotel description will appear here.'}}</p>
+                  <div class="mt-2">
+                    <span
+                      [class]="getStatusBadgeClass(hotelData.status)"
+                      class="px-2 py-1 text-xs font-bold rounded-full uppercase"
+                    >
+                      {{hotelData.status}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex justify-end space-x-4 mt-6">
+          <button
+            type="button"
+            (click)="closeModal()"
+            class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            [disabled]="isSaving"
+            class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-50"
+          >
+            <span *ngIf="isSaving" class="flex items-center">
+              <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Saving...
+            </span>
+            <span *ngIf="!isSaving">{{editMode ? 'Update Hotel' : 'Add Hotel'}}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
