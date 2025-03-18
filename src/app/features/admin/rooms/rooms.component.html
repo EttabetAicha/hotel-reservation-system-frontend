@@ -52,7 +52,7 @@
     <div *ngFor="let room of filteredRooms" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <!-- Room Image -->
       <div class="relative h-48">
-        <img [src]="room.image" [alt]="room.name" class="w-full h-full object-cover">
+        <img [src]="room.imageUrl" [alt]="room.name" class="w-full h-full object-cover">
         <div class="absolute top-2 right-2">
           <span
             [class]="getStatusBadgeClass(room.status)"
@@ -68,7 +68,7 @@
         <div class="flex justify-between items-start mb-2">
           <div>
             <h3 class="text-lg font-bold text-gray-800">{{ room.name }}</h3>
-            <p class="text-sm text-gray-600">{{ room.hotelName }}</p>
+            <p class="text-sm text-gray-600">{{ room.hotel }}</p>
           </div>
           <div class="text-xl font-bold text-indigo-600">${{ room.price }}</div>
         </div>
@@ -77,29 +77,26 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
-          <span class="text-gray-700">{{ room.capacity }} guests</span>
+          <span class="text-gray-700">{{ room.roomNumber }} guests</span>
         </div>
 
         <div class="mb-4">
-          <div class="text-sm font-medium text-gray-700 mb-1">Amenities:</div>
+          <div class="text-sm font-medium text-gray-700 mb-1">Room Type:</div>
           <div class="flex flex-wrap gap-2">
-            <span *ngFor="let amenity of room.amenities.slice(0, 3)" class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">
-              {{ amenity }}
-            </span>
-            <span *ngIf="room.amenities.length > 3" class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">
-              +{{ room.amenities.length - 3 }} more
+            <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">
+              {{ room.type}}
             </span>
           </div>
         </div>
 
         <!-- Action Buttons -->
         <div class="flex justify-between">
-          <button
+          <!-- <button
             (click)="viewRoomDetails(room.id)"
             class="text-indigo-600 hover:text-indigo-800 font-medium text-sm"
           >
             View Details
-          </button>
+          </button> -->
           <div class="flex space-x-2">
             <button
               (click)="editRoom(room)"
