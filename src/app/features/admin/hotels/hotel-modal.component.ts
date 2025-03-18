@@ -4,19 +4,10 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { HotelService } from "../../../core/services/hotel.service";
 import { jwtDecode } from 'jwt-decode';
+import { HotelFormData } from '../../../core/models/hotel.interface';
+import Swal from 'sweetalert2';
 
 
-export interface HotelFormData {
-  id?: number;
-  name: string;
-  location: string;
-  description: string;
-  stars: number;
-  amenities: string[];
-  images: string[];
-  status: "active" | "maintenance" | "closed";
-  ownerId: string;
-}
 
 @Component({
   selector: "app-hotel-modal",
@@ -77,7 +68,6 @@ export class HotelModalComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.resetForm();
-    // Initialize with at least one empty image URL if none exists
     if (!this.hotelData.images || this.hotelData.images.length === 0) {
       this.hotelData.images = [''];
     }
@@ -86,19 +76,34 @@ export class HotelModalComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     if (this.isOpen) {
       if (this.editMode && this.hotelToEdit) {
-        // Make a deep copy of the hotel data to avoid reference issues
+        const token = localStorage.getItem('auth-token');
+        let userId = '';
+
+        if (token) {
+          try {
+            const decodedToken: any = jwtDecode(token);
+            userId = decodedToken.userId|| '';
+            console.log(userId)
+          } catch (error) {
+            console.error('Error decoding token:', error);
+          }
+        }
+
         this.hotelData = {
           ...this.hotelToEdit,
-          // Ensure stars is a number
           stars: Number(this.hotelToEdit.stars),
-          // Ensure images is an array
+          rating: this.hotelToEdit.rating || String(this.hotelToEdit.stars),
+          address: this.hotelToEdit.address || this.hotelToEdit.address,
+          city: this.hotelToEdit.city || '',
+          country: this.hotelToEdit.country || '',
           images: Array.isArray(this.hotelToEdit.images) ? [...this.hotelToEdit.images] : [''],
-          // Ensure amenities is an array
-          amenities: Array.isArray(this.hotelToEdit.amenities) ? [...this.hotelToEdit.amenities] : []
+          amenities: Array.isArray(this.hotelToEdit.amenities) ? [...this.hotelToEdit.amenities] : [],
+          ownerId: this.hotelToEdit.ownerId || userId || ''
+
+
         };
       } else {
         this.resetForm();
-        // Initialize with at least one empty image URL
         if (!this.hotelData.images || this.hotelData.images.length === 0) {
           this.hotelData.images = [''];
         }
@@ -114,6 +119,7 @@ export class HotelModalComponent implements OnInit, OnChanges {
 
   getEmptyHotelData(): HotelFormData {
     const token = localStorage.getItem('auth-token');
+    let userId = '';
     console.log('Token:', token);
 
     if (token) {
@@ -121,6 +127,7 @@ export class HotelModalComponent implements OnInit, OnChanges {
         const decodedToken: any = jwtDecode(token);
         console.log('Decoded token:', decodedToken);
         this.userName = decodedToken.username || decodedToken.name || decodedToken.sub;
+        userId = decodedToken.userId || decodedToken.sub || decodedToken.id || '';
         console.log('Set username to:', this.userName);
       } catch (error) {
         console.error('Error decoding token:', error);
@@ -133,13 +140,16 @@ export class HotelModalComponent implements OnInit, OnChanges {
 
     return {
       name: "",
-      location: "",
+      address: "",
+      city: "",
+      country: "",
+      rating: "3",
       description: "",
       stars: 3,
-      images: [''], // Initialize with one empty image URL
+      images: [''],
       amenities: [],
       status: "active",
-      ownerId: this.userName || '', // Use the extracted owner ID or default to an empty string
+      ownerId: userId ,
     };
   }
 
@@ -198,7 +208,6 @@ export class HotelModalComponent implements OnInit, OnChanges {
     if (this.hotelData.images && this.hotelData.images.length > 1 && index >= 0 && index < this.hotelData.images.length) {
       this.hotelData.images.splice(index, 1);
     } else if (this.hotelData.images && this.hotelData.images.length === 1) {
-      // If it's the last image, clear it but don't remove it
       this.hotelData.images[0] = '';
     }
   }
@@ -210,8 +219,16 @@ export class HotelModalComponent implements OnInit, OnChanges {
       this.errors['name'] = 'Hotel name is required.';
     }
 
-    if (!this.hotelData.location) {
-      this.errors['location'] = 'Location is required.';
+    if (!this.hotelData.address) {
+      this.errors['address'] = 'Address is required.';
+    }
+
+    if (!this.hotelData.city) {
+      this.errors['city'] = 'City is required.';
+    }
+
+    if (!this.hotelData.country) {
+      this.errors['country'] = 'Country is required.';
     }
 
     if (!this.hotelData.description) {
@@ -230,6 +247,10 @@ export class HotelModalComponent implements OnInit, OnChanges {
       this.errors['status'] = 'Status is required.';
     }
 
+    if (!this.hotelData.ownerId) {
+      this.errors['ownerId'] = 'Owner ID is required.';
+    }
+
     return Object.keys(this.errors).length === 0;
   }
 
@@ -238,26 +259,39 @@ export class HotelModalComponent implements OnInit, OnChanges {
       return;
     }
 
+    // Sync stars and rating before saving
+    this.hotelData.rating = String(this.hotelData.stars);
+
     this.isSaving = true;
 
     if (this.editMode && this.hotelData.id) {
-      // this.hotelService.updateHotel(this.hotelData.id, this.hotelData).subscribe({
-      //   next: (response) => {
-      //     this.isSaving = false;
-      //     this.save.emit(response);
-      //     this.closeModal();
-      //   },
-      //   error: (error) => {
-      //     this.isSaving = false;
-      //     this.errors['general'] = 'An error occurred while updating the hotel.';
-      //     console.error('Update Hotel Error:', error);
-      //   }
-      // });
+      this.hotelService.updateHotel(this.hotelData.id, this.hotelData).subscribe({
+        next: (response) => {
+          this.isSaving = false;
+            this.save.emit(response);
+            Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Hotel updated successfully!',
+            });
+          this.closeModal();
+        },
+        error: (error) => {
+          this.isSaving = false;
+          this.errors['general'] = 'An error occurred while updating the hotel.';
+          console.error('Update Hotel Error:', error);
+        }
+      });
     } else {
       this.hotelService.createHotel(this.hotelData).subscribe({
         next: (response) => {
           this.isSaving = false;
           this.save.emit(response);
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Hotel adding successfully!',
+            });
           this.closeModal();
         },
         error: (error) => {
