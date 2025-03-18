@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { HotelFormData } from '../../features/admin/hotels/hotel-modal.component';
+import { HotelFormData } from '../models/hotel.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class HotelService {
     return this.http.post<HotelFormData>(this.apiUrl, hotel);
   }
 
-  updateHotel(id: string, hotel: HotelFormData): Observable<HotelFormData> {
+  updateHotel(id: number, hotel: HotelFormData): Observable<HotelFormData> {
     return this.http.put<HotelFormData>(`${this.apiUrl}/${id}`, hotel);
   }
 
