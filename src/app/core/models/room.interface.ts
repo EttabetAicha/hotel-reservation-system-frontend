@@ -1,3 +1,5 @@
+import { HotelFormData } from "./hotel.interface"
+
 export interface Room {
   id: number
   name: string
@@ -9,4 +11,34 @@ export interface Room {
   features: string[]
   description: string
 }
+export enum RoomType {
+  SINGLE,
+  DOUBLE,
+  TWIN,
+  SUITE,
+  DELUXE,
+  EXECUTIVE,
+  FAMILY,
+  PRESIDENTIAL, 
+  STUDIO
+}
 
+export enum RoomStatus {
+  AVAILABLE,
+  OCCUPIED,
+  MAINTENANCE,
+  RESERVED
+}
+
+export interface RoomFormData {
+  id?: string;
+  name: string;
+  hotel: string;
+  roomNumber: string;
+  type: RoomType;
+  price: number;
+  isAvailable: boolean;
+  description: string;
+  imageUrl: string;
+  status: RoomStatus;
+}
