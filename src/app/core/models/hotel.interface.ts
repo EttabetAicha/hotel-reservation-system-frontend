@@ -14,3 +14,18 @@ export interface Hotel {
   distance?: string
   description: string
 }
+export interface HotelFormData {
+  id?: number;
+  name: string;
+  address: string;
+  city: string;
+  country: string;
+  rating: string;
+  description: string;
+  stars: number;
+  amenities: string[];
+  images: string[];
+  status: "active" | "maintenance" | "closed";
+  ownerId?: string;
+}
+
