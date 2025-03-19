@@ -15,7 +15,7 @@ export interface Hotel {
   description: string
 }
 export interface HotelFormData {
-  id?: number;
+  id?: string;
   name: string;
   address: string;
   city: string;
