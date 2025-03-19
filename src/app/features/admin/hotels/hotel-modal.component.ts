@@ -265,7 +265,7 @@ export class HotelModalComponent implements OnInit, OnChanges {
     this.isSaving = true;
 
     if (this.editMode && this.hotelData.id) {
-      this.hotelService.updateHotel(this.hotelData.id, this.hotelData).subscribe({
+      this.hotelService.updateHotel(Number(this.hotelData.id), this.hotelData).subscribe({
         next: (response) => {
           this.isSaving = false;
             this.save.emit(response);
