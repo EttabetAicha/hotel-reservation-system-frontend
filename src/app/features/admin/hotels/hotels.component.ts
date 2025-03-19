@@ -15,12 +15,10 @@ export class AdminHotelsComponent implements OnInit {
   filteredHotels: HotelFormData[] = [];
   searchTerm = '';
 
-  // Hotel modal
   showHotelModal = false;
   hotelModalEditMode = false;
   hotelToEdit: HotelFormData | null = null;
 
-  // Delete modal
   showDeleteModal = false;
   hotelToDelete: HotelFormData | null = null;
   isDeleting = false;
@@ -30,7 +28,6 @@ export class AdminHotelsComponent implements OnInit {
   ngOnInit(): void {
     this.fetchHotels();
   }
-
   fetchHotels(): void {
     this.hotelService.getAllHotels().subscribe((hotels) => {
       this.hotels = hotels;
@@ -39,17 +36,21 @@ export class AdminHotelsComponent implements OnInit {
   }
 
   filterHotels(): void {
-    if (!this.searchTerm.trim()) {
-      this.filteredHotels = [...this.hotels];
-      return;
+    let filtered = [...this.hotels];
+
+    if (this.searchTerm && this.searchTerm.trim()) {
+      const term = this.searchTerm.toLowerCase().trim();
+      filtered = filtered.filter(hotel =>
+        hotel.name.toLowerCase().includes(term) ||
+        hotel.address.toLowerCase().includes(term) ||
+        hotel.city?.toLowerCase().includes(term)
+      );
     }
 
-    const term = this.searchTerm.toLowerCase().trim();
-    this.filteredHotels = this.hotels.filter(hotel =>
-      hotel.name.toLowerCase().includes(term) ||
-      hotel.address.toLowerCase().includes(term)
-    );
+    this.filteredHotels = filtered;
   }
+
+
 
   getStatusBadgeClass(status: string): string {
     switch (status) {
@@ -64,7 +65,6 @@ export class AdminHotelsComponent implements OnInit {
     }
   }
 
-  // Hotel Modal Methods
   openAddHotelModal(): void {
     this.hotelModalEditMode = false;
     this.hotelToEdit = null;
@@ -83,20 +83,17 @@ export class AdminHotelsComponent implements OnInit {
 
   saveHotel(hotelData: HotelFormData): void {
     if (this.hotelModalEditMode && this.hotelToEdit) {
-      // Update existing hotel
       this.hotelService.updateHotel(Number(this.hotelToEdit?.id), hotelData).subscribe(() => {
         this.fetchHotels();
         this.closeHotelModal();
       });
     } else {
-      // Add new hotel
       this.hotelService.createHotel(hotelData).subscribe(() => {
         this.fetchHotels();
         this.closeHotelModal();
       });
     }
   }
-  // Delete Modal Methods
   openDeleteModal(hotel: HotelFormData): void {
     this.hotelToDelete = hotel;
     this.showDeleteModal = true;
@@ -116,7 +113,6 @@ export class AdminHotelsComponent implements OnInit {
   }
 
   viewHotelDetails(id: number): void {
-    // Implementation for viewing hotel details
     console.log("View hotel details", id);
   }
 }

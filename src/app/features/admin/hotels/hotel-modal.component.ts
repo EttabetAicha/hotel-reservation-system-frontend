@@ -259,7 +259,6 @@ export class HotelModalComponent implements OnInit, OnChanges {
       return;
     }
 
-    // Sync stars and rating before saving
     this.hotelData.rating = String(this.hotelData.stars);
 
     this.isSaving = true;
