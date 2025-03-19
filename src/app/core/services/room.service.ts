@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { RoomFormData } from '../models/room.interface';
 
 @Injectable({
@@ -14,13 +14,20 @@ export class RoomService {
   getAllRoomDatas(): Observable<RoomFormData[]> {
     return this.http.get<RoomFormData[]>(this.apiUrl);
   }
+getRoomDataById(id: string) {
+  return this.http.get<RoomFormData>(`${this.apiUrl}/${id}`).pipe(
+    tap(room => {
+      console.log('Fetched room data:', room);
+    })
+  );
+}
 
-  getRoomDataById(id: string): Observable<RoomFormData> {
-    return this.http.get<RoomFormData>(`${this.apiUrl}/${id}`);
+  getRoomDataByHotelId(hotelId: string): Observable<RoomFormData> {
+    return this.http.get<RoomFormData>(`${this.apiUrl}/hotel/${hotelId}`);
   }
 
-  createRoomData(roomData: RoomFormData): Observable<RoomFormData> {
-    return this.http.post<RoomFormData>(`${this.apiUrl}/${roomData.hotel}`, roomData); // Include hotelId in the URL
+  createRoomData(roomData: RoomFormData, hotelId: string): Observable<RoomFormData> {
+    return this.http.post<RoomFormData>(`${this.apiUrl}/${hotelId}`, roomData);
   }
 
   updateRoomData(id: string, roomData: RoomFormData): Observable<RoomFormData> {

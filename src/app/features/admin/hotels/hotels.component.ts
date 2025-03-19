@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { HotelModalComponent, type HotelFormData } from "./hotel-modal.component";
 import { HotelService } from "../../../core/services/hotel.service";
+import { HotelModalComponent } from "./hotel-modal.component";
+import { HotelFormData } from "../../../core/models/hotel.interface";
 
 @Component({
   selector: "app-admin-hotels",
@@ -46,7 +47,7 @@ export class AdminHotelsComponent implements OnInit {
     const term = this.searchTerm.toLowerCase().trim();
     this.filteredHotels = this.hotels.filter(hotel =>
       hotel.name.toLowerCase().includes(term) ||
-      hotel.location.toLowerCase().includes(term)
+      hotel.address.toLowerCase().includes(term)
     );
   }
 
@@ -83,7 +84,7 @@ export class AdminHotelsComponent implements OnInit {
   saveHotel(hotelData: HotelFormData): void {
     if (this.hotelModalEditMode && this.hotelToEdit) {
       // Update existing hotel
-      this.hotelService.updateHotel(this.hotelToEdit.id!.toString(), hotelData).subscribe(() => {
+      this.hotelService.updateHotel(Number(this.hotelToEdit?.id), hotelData).subscribe(() => {
         this.fetchHotels();
         this.closeHotelModal();
       });
@@ -95,7 +96,6 @@ export class AdminHotelsComponent implements OnInit {
       });
     }
   }
-
   // Delete Modal Methods
   openDeleteModal(hotel: HotelFormData): void {
     this.hotelToDelete = hotel;
