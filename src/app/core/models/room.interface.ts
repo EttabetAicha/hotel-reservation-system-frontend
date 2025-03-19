@@ -19,7 +19,7 @@ export enum RoomType {
   DELUXE,
   EXECUTIVE,
   FAMILY,
-  PRESIDENTIAL, 
+  PRESIDENTIAL,
   STUDIO
 }
 
@@ -33,7 +33,7 @@ export enum RoomStatus {
 export interface RoomFormData {
   id?: string;
   name: string;
-  hotel: string;
+  hotel: string ;
   roomNumber: string;
   type: RoomType;
   price: number;
@@ -41,4 +41,5 @@ export interface RoomFormData {
   description: string;
   imageUrl: string;
   status: RoomStatus;
+  hotelName?:string
 }
