@@ -51,11 +51,18 @@ export class AdminRoomsComponent implements OnInit {
     });
   }
 
+
   filterRooms(): void {
     let filtered = [...this.rooms];
 
     if (this.filterHotel !== 0) {
       filtered = filtered.filter(room => room.hotel === this.filterHotel.toString());
+    }
+    if (this.searchTerm && this.searchTerm.trim()) {
+      const term = this.searchTerm.toLowerCase().trim();
+      filtered = filtered.filter(room =>
+        room.name.toLowerCase().includes(term) 
+      );
     }
 
     if (this.searchTerm && this.searchTerm.trim()) {
