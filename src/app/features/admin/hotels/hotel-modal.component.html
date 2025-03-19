@@ -49,25 +49,66 @@
               </div>
 
               <div>
-                <label for="hotel-location" class="block text-sm font-medium text-gray-700 mb-1">Location*</label>
+                <label for="hotel-address" class="block text-sm font-medium text-gray-700 mb-1">Address*</label>
                 <input
                   type="text"
-                  id="hotel-location"
-                  name="location"
-                  [(ngModel)]="hotelData.location"
+                  id="hotel-address"
+                  name="address"
+                  [(ngModel)]="hotelData.address"
                   required
                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
-                <div *ngIf="errors['location']" class="mt-1 text-sm text-red-600">{{errors['location']}}</div>
+                <div *ngIf="errors['address']" class="mt-1 text-sm text-red-600">{{errors['address']}}</div>
               </div>
+
+              <div>
+                <label for="hotel-city" class="block text-sm font-medium text-gray-700 mb-1">City*</label>
+                <input
+                  type="text"
+                  id="hotel-city"
+                  name="city"
+                  [(ngModel)]="hotelData.city"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                <div *ngIf="errors['city']" class="mt-1 text-sm text-red-600">{{errors['city']}}</div>
+              </div>
+
+              <div>
+                <label for="hotel-country" class="block text-sm font-medium text-gray-700 mb-1">Country*</label>
+                <input
+                  type="text"
+                  id="hotel-country"
+                  name="country"
+                  [(ngModel)]="hotelData.country"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                <div *ngIf="errors['country']" class="mt-1 text-sm text-red-600">{{errors['country']}}</div>
+              </div>
+
+              <div>
+                <label for="hotel-rating" class="block text-sm font-medium text-gray-700 mb-1">Rating*</label>
+                <input
+                  type="text"
+                  id="hotel-rating"
+                  name="rating"
+                  [(ngModel)]="hotelData.rating"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                <div *ngIf="errors['rating']" class="mt-1 text-sm text-red-600">{{errors['rating']}}</div>
+              </div>
+
+
             </div>
           </div>
 
           <!-- Owner ID -->
-          <div class="mb-6">
+          <!-- <div class="mb-6">
             <label for="hotel-owner-id" class="block text-sm font-medium text-gray-700 mb-1">Owner *</label>
             <input
-             readonly
+              readonly
               type="text"
               id="hotel-owner-id"
               name="ownerId"
@@ -76,7 +117,7 @@
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
             <div *ngIf="errors['ownerId']" class="mt-1 text-sm text-red-600">{{errors['ownerId']}}</div>
-          </div>
+          </div> -->
 
           <!-- Description -->
           <div class="mb-6">
@@ -199,7 +240,7 @@
                         </svg>
                       </ng-container>
                     </div>
-                    <span class="ml-2 text-gray-600">{{hotelData.location || 'Location'}}</span>
+                    <span class="ml-2 text-gray-600">{{hotelData.address || 'address'}}</span>
                   </div>
                   <p class="text-gray-700">{{hotelData.description || 'Hotel description will appear here.'}}</p>
                   <div class="mt-2">
