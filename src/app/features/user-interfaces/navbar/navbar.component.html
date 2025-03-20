@@ -20,7 +20,7 @@
         <button (click)="logout()" class="px-4 py-2 text-sm mx-5  bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
           Log out
         </button>
-        <button routerLink="/admin/dashboard" class="px-4 py-2  text-sm bg-cyan-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
+        <button *ngIf="role === 'ADMIN'" routerLink="/admin/dashboard" class="px-4 py-2  text-sm bg-cyan-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
           Dashboard
         </button>
       </div>

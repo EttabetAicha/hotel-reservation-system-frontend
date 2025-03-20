@@ -19,6 +19,7 @@ import {jwtDecode} from 'jwt-decode';
 })
 export class NavbarComponent implements OnInit {
   userName: string | null = '';
+  role:string | null= "";
 
   constructor(private router: Router) {}
 
@@ -29,9 +30,12 @@ export class NavbarComponent implements OnInit {
     if (token) {
       try {
         const decodedToken: any = jwtDecode(token);
-        console.log('Decoded token:', decodedToken); 
+        console.log('Decoded token:', decodedToken);
         this.userName = decodedToken.username || decodedToken.name || decodedToken.sub;
+        this.role= decodedToken.role
         console.log('Set username to:', this.userName);
+        console.log('Set role to:', this.role);
+
       } catch (error) {
         console.error('Error decoding token:', error);
         this.userName = null;

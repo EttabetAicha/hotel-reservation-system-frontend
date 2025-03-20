@@ -38,14 +38,18 @@
 
       <!-- Profile Dropdown -->
       <div class="relative">
-        <button class="flex items-center focus:outline-none">
+        <button class="flex items-center focus:outline-none" (click)="isDropdownOpen = !isDropdownOpen">
           <img class="h-8 w-8 rounded-full" src="https://media.licdn.com/dms/image/v2/D4E03AQH_D9aJqswZPQ/profile-displayphoto-shrink_400_400/B4EZR5YtPSGgAg-/0/1737203326415?e=1746662400&v=beta&t=D3rsyj5RduxZP_VFxa43h-FyQAnJMbAnYFNxrwsfBcI" alt="Admin user">
           <span class="ml-2 text-gray-700 hidden md:block">Admin User</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
         </button>
-        <!-- Dropdown menu would go here -->
+        <div *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+          <a href="#" (click)="logout()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+        </div>
       </div>
     </div>
   </div>
