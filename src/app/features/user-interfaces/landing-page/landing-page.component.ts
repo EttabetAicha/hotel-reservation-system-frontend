@@ -1,15 +1,15 @@
-import { FooterComponent } from './../footer/footer.component';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
-import { RouterLink } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,RouterLink,NavbarComponent,FooterComponent],
+  imports: [CommonModule, ReactiveFormsModule, NavbarComponent, FooterComponent],
   animations: [
     trigger('fadeInUp', [
       state('void', style({
@@ -73,12 +73,12 @@ import { NavbarComponent } from '../navbar/navbar.component';
       ])
     ])
   ],
-  templateUrl:"./landing-page.component.html"
+  templateUrl: './landing-page.component.html'
 })
 export class LandingPageComponent implements OnInit {
   searchForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.searchForm = this.fb.group({
       destination: [''],
       checkIn: [''],
@@ -87,6 +87,23 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  onSubmit() {
+    if (this.searchForm.valid) {
+      const searchCriteria = this.searchForm.value;
+
+      // Navigate to the search results page with query parameters
+      this.router.navigate(['/search-results'], {
+        queryParams: {
+          destination: searchCriteria.destination,
+          checkIn: searchCriteria.checkIn,
+          checkOut: searchCriteria.checkOut,
+          guests: searchCriteria.guests
+        }
+      });
+    } else {
+      console.log('Form is invalid');
+    }
   }
 }

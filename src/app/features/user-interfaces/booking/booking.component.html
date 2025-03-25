@@ -1,26 +1,36 @@
 <div class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-rose-50">
   <app-navbar></app-navbar>
 
-  <div class="container mx-auto px-4 py-8" @fadeIn>
+  <div class="container mx-auto px-4 py-8 sm:py-12" @fadeIn>
     <!-- Breadcrumb -->
-    <div class="flex items-center text-sm text-gray-600 mb-6">
-      <a href="#" class="hover:text-indigo-600 transition-colors duration-200">Home</a>
-      <span class="mx-2">/</span>
+    <div class="flex items-center text-sm text-gray-600 mb-6 ml-1">
+      <a routerLink="/" class="hover:text-indigo-600 transition-colors duration-200 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        Home
+      </a>
+      <span class="mx-2 text-gray-400">/</span>
       <span class="text-gray-800 font-medium">My Bookings</span>
     </div>
 
     <div class="max-w-6xl mx-auto">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-4 md:mb-0">My Bookings</h1>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4 md:mb-0 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          My Bookings
+        </h1>
 
         <!-- Filter Tabs -->
-        <div class="flex space-x-2 bg-white rounded-lg shadow-sm p-1">
+        <div class="flex space-x-1 bg-white rounded-xl shadow-sm p-1.5 border border-gray-100">
           <button
             (click)="filterBookings('all')"
             [class.bg-indigo-600]="activeFilter === 'all'"
             [class.text-white]="activeFilter === 'all'"
             [class.text-gray-700]="activeFilter !== 'all'"
-            class="px-4 py-2 rounded-md transition-colors duration-200"
+            class="px-4 py-2 rounded-lg transition-all duration-200 text-sm font-medium hover:bg-indigo-50"
           >
             All
           </button>
@@ -29,49 +39,70 @@
             [class.bg-indigo-600]="activeFilter === 'upcoming'"
             [class.text-white]="activeFilter === 'upcoming'"
             [class.text-gray-700]="activeFilter !== 'upcoming'"
-            class="px-4 py-2 rounded-md transition-colors duration-200"
+            class="px-4 py-2 rounded-lg transition-all duration-200 text-sm font-medium hover:bg-indigo-50"
           >
-            Upcoming
+            <span class="flex items-center">
+              <svg *ngIf="activeFilter === 'upcoming'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Upcoming
+            </span>
           </button>
           <button
             (click)="filterBookings('completed')"
             [class.bg-indigo-600]="activeFilter === 'completed'"
             [class.text-white]="activeFilter === 'completed'"
             [class.text-gray-700]="activeFilter !== 'completed'"
-            class="px-4 py-2 rounded-md transition-colors duration-200"
+            class="px-4 py-2 rounded-lg transition-all duration-200 text-sm font-medium hover:bg-indigo-50"
           >
-            Completed
+            <span class="flex items-center">
+              <svg *ngIf="activeFilter === 'completed'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Completed
+            </span>
           </button>
           <button
             (click)="filterBookings('cancelled')"
             [class.bg-indigo-600]="activeFilter === 'cancelled'"
             [class.text-white]="activeFilter === 'cancelled'"
             [class.text-gray-700]="activeFilter !== 'cancelled'"
-            class="px-4 py-2 rounded-md transition-colors duration-200"
+            class="px-4 py-2 rounded-lg transition-all duration-200 text-sm font-medium hover:bg-indigo-50"
           >
-            Cancelled
+            <span class="flex items-center">
+              <svg *ngIf="activeFilter === 'cancelled'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              Cancelled
+            </span>
           </button>
         </div>
       </div>
 
       <!-- Loading State -->
-      <div *ngIf="isLoading" class="flex justify-center items-center py-20">
-        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600"></div>
+      <div *ngIf="isLoading" class="flex flex-col justify-center items-center py-20">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600 mb-4"></div>
+        <p class="text-gray-600 animate-pulse">Loading your bookings...</p>
       </div>
 
       <!-- No Bookings State -->
       <div *ngIf="!isLoading && filteredBookings.length === 0" class="bg-white rounded-xl shadow-md p-8 text-center" @slideInUp>
         <div class="flex justify-center mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-          </svg>
+          <div class="p-4 bg-indigo-50 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
         </div>
-        <h2 class="text-xl font-bold text-gray-800 mb-2">No bookings found</h2>
-        <p class="text-gray-600 mb-6">You don't have any {{ activeFilter !== 'all' ? activeFilter : '' }} bookings yet.</p>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">No bookings found</h2>
+        <p class="text-gray-600 mb-8 max-w-md mx-auto">You don't have any {{ activeFilter !== 'all' ? activeFilter : '' }} bookings yet. Start exploring our amazing hotels and book your perfect stay.</p>
         <button
           routerLink="/hotel-list"
-          class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-300"
+          class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-300 shadow-md hover:shadow-lg flex items-center mx-auto"
         >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
           Browse Hotels
         </button>
       </div>
@@ -80,19 +111,31 @@
       <div *ngIf="!isLoading && filteredBookings.length > 0" class="space-y-6" @staggerList>
         <div
           *ngFor="let booking of filteredBookings"
-          class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+          class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100"
         >
           <div class="flex flex-col md:flex-row">
             <!-- Hotel Image -->
-            <div class="md:w-1/4 relative">
+            <div class="md:w-1/4 relative group">
               <img
                 [src]="booking.hotelImage"
                 [alt]="booking.hotelName"
-                class="w-full h-48 md:h-full object-cover cursor-pointer"
+                class="w-full h-48 md:h-full object-cover cursor-pointer transition-transform duration-500 group-hover:scale-105"
                 (click)="viewHotel(booking.hotelId)"
               />
-              <div class="absolute top-2 right-2">
-                <span [class]="getStatusClass(booking.status) + ' px-3 py-1 rounded-full text-xs font-bold uppercase'">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-4">
+                <button
+                  (click)="viewHotel(booking.hotelId)"
+                  class="text-white bg-indigo-600/90 hover:bg-indigo-700 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  View Hotel
+                </button>
+              </div>
+              <div class="absolute top-3 right-3">
+                <span [class]="getStatusClass(booking.status) + ' px-3 py-1 rounded-full text-xs font-bold uppercase shadow-sm'">
                   {{ booking.status }}
                 </span>
               </div>
@@ -102,50 +145,138 @@
             <div class="p-6 md:w-3/4 flex flex-col">
               <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
                 <div>
-                  <h3 class="text-xl font-bold text-gray-800 mb-1 cursor-pointer hover:text-indigo-600 transition-colors duration-200" (click)="viewHotel(booking.hotelId)">
+                  <h3 class="text-xl font-bold text-gray-800 mb-1 cursor-pointer hover:text-indigo-600 transition-colors duration-200 flex items-center" (click)="viewHotel(booking.hotelId)">
                     {{ booking.hotelName }}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
                   </h3>
-                  <p class="text-gray-600">{{ booking.roomName }}</p>
+                  <p class="text-gray-600 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    {{ booking.roomName }}
+                  </p>
                 </div>
-                <div class="mt-2 md:mt-0">
+                <div class="mt-2 md:mt-0 bg-indigo-50 px-4 py-2 rounded-lg">
+                  <div class="text-xs text-indigo-600 font-medium">TOTAL PRICE</div>
                   <span class="text-2xl font-bold text-gray-800">${{ booking.totalAmount }}</span>
                 </div>
               </div>
 
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                <div>
-                  <div class="text-sm text-gray-600">Check-in</div>
-                  <div class="font-medium">{{ formatDate(booking.checkIn) }}</div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 bg-gray-50 p-3 rounded-lg">
+                <div class="flex items-center">
+                  <div class="p-2 bg-green-100 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-xs text-gray-500 uppercase font-medium">Check-in</div>
+                    <div class="font-medium">{{ formatDate(booking.checkIn) }}</div>
+                  </div>
                 </div>
-                <div>
-                  <div class="text-sm text-gray-600">Check-out</div>
-                  <div class="font-medium">{{ formatDate(booking.checkOut) }}</div>
+                <div class="flex items-center">
+                  <div class="p-2 bg-red-100 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-xs text-gray-500 uppercase font-medium">Check-out</div>
+                    <div class="font-medium">{{ formatDate(booking.checkOut) }}</div>
+                  </div>
                 </div>
-                <div>
-                  <div class="text-sm text-gray-600">Stay</div>
-                  <div class="font-medium">{{ calculateNights(booking.checkIn, booking.checkOut) }} nights, {{ booking.guests }} {{ booking.guests > 1 ? 'guests' : 'guest' }}</div>
+                <div class="flex items-center">
+                  <div class="p-2 bg-blue-100 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-xs text-gray-500 uppercase font-medium">Stay Duration</div>
+                    <div class="font-medium">{{ calculateNights(booking.checkIn, booking.checkOut) }} nights, {{ booking.guests }} {{ booking.guests > 1 ? 'guests' : 'guest' }}</div>
+                  </div>
                 </div>
               </div>
 
-              <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+              <!-- Payment Information (if available) -->
+              <div *ngIf="booking.payment" class="bg-white rounded-lg p-4 mb-4 border border-gray-200">
+                <h4 class="text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                  Payment Information
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                  <div class="flex items-center">
+                    <span class="text-gray-600 mr-2">Amount:</span>
+                    <span class="font-medium text-gray-900">${{ booking.payment.amount }}</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-gray-600 mr-2">Method:</span>
+                    <span class="font-medium text-gray-900 flex items-center">
+                      <svg *ngIf="booking.payment.paymentMethod.toLowerCase().includes('card')" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                      </svg>
+                      {{ booking.payment.paymentMethod }}
+                    </span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-gray-600 mr-2">Status:</span>
+                    <span [ngClass]="{
+                      'text-green-600 bg-green-50 px-2 py-0.5 rounded-full text-xs font-medium': booking.payment.paymentStatus === 'COMPLETED',
+                      'text-yellow-600 bg-yellow-50 px-2 py-0.5 rounded-full text-xs font-medium': booking.payment.paymentStatus === 'PENDING',
+                      'text-red-600 bg-red-50 px-2 py-0.5 rounded-full text-xs font-medium': booking.payment.paymentStatus === 'FAILED' || booking.payment.paymentStatus === 'CANCELLED'
+                    }">
+                      {{ booking.payment.paymentStatus }}
+                    </span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-gray-600 mr-2">Payer:</span>
+                    <span class="font-medium text-gray-900">{{ booking.payment.payerName }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-t border-gray-100 pt-4">
                 <div class="mb-4 md:mb-0">
-                  <div class="text-sm text-gray-600">Booking ID</div>
-                  <div class="font-medium">{{ booking.id }}</div>
-                  <div class="text-sm text-gray-600 mt-1">Booked on {{ formatDate(booking.bookingDate) }}</div>
+                  <div class="text-xs text-gray-500 uppercase font-medium">Booking ID</div>
+                  <div class="font-medium text-gray-800 flex items-center">
+                    <span class="font-mono">{{ booking.id }}</span>
+                    <button class="ml-2 text-indigo-600 hover:text-indigo-800" title="Copy booking ID">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="text-xs text-gray-500 mt-1 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Booked on {{ formatDate(booking.bookingDate) }}
+                  </div>
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-3">
                   <button
                     (click)="viewBookingDetails(booking.id)"
-                    class="px-4 py-2 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors duration-300"
+                    class="px-4 py-2 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors duration-300 flex items-center justify-center"
                   >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
                     View Details
                   </button>
                   <button
                     *ngIf="booking.status === 'upcoming'"
                     (click)="confirmCancellation(booking)"
-                    class="px-4 py-2 border border-red-600 text-red-600 rounded-lg hover:bg-red-50 transition-colors duration-300"
+                    class="px-4 py-2 border border-red-600 text-red-600 rounded-lg hover:bg-red-50 transition-colors duration-300 flex items-center justify-center"
                   >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                     Cancel Booking
                   </button>
                 </div>
@@ -158,14 +289,19 @@
   </div>
 
   <!-- Cancellation Confirmation Modal -->
-  <div *ngIf="showCancelModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" @fadeIn>
+  <div *ngIf="showCancelModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 backdrop-blur-sm" @fadeIn>
     <div class="bg-white rounded-xl shadow-xl max-w-md w-full" @slideInUp>
       <div class="p-6 border-b border-gray-200">
         <div class="flex justify-between items-center">
-          <h2 class="text-xl font-bold text-gray-800">Cancel Booking</h2>
+          <h2 class="text-xl font-bold text-gray-800 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            Cancel Booking
+          </h2>
           <button
             (click)="closeCancelModal()"
-            class="text-gray-500 hover:text-gray-700 transition-colors duration-200"
+            class="text-gray-500 hover:text-gray-700 transition-colors duration-200 p-1 rounded-full hover:bg-gray-100"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -175,25 +311,29 @@
       </div>
 
       <div class="p-6">
-        <div class="flex items-center justify-center mb-6 text-red-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
+        <div class="flex items-center justify-center mb-6">
+          <div class="p-4 bg-red-50 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
         </div>
 
         <h3 class="text-lg font-bold text-gray-800 mb-2 text-center">Are you sure you want to cancel this booking?</h3>
-        <p class="text-gray-600 mb-6 text-center">This action cannot be undone.</p>
+        <p class="text-gray-600 mb-6 text-center">This action cannot be undone and may be subject to cancellation fees.</p>
 
-        <div *ngIf="bookingToCancel" class="bg-gray-50 rounded-lg p-4 mb-6">
-          <div class="grid grid-cols-2 gap-2">
-            <div class="text-gray-600">Hotel:</div>
+        <div *ngIf="bookingToCancel" class="bg-gray-50 rounded-lg p-4 mb-6 border border-gray-200">
+          <div class="grid grid-cols-2 gap-3">
+            <div class="text-gray-600 text-sm">Hotel:</div>
             <div class="font-medium">{{ bookingToCancel.hotelName }}</div>
-            <div class="text-gray-600">Room:</div>
+            <div class="text-gray-600 text-sm">Room:</div>
             <div class="font-medium">{{ bookingToCancel.roomName }}</div>
-            <div class="text-gray-600">Check-in:</div>
+            <div class="text-gray-600 text-sm">Check-in:</div>
             <div class="font-medium">{{ formatDate(bookingToCancel.checkIn) }}</div>
-            <div class="text-gray-600">Check-out:</div>
+            <div class="text-gray-600 text-sm">Check-out:</div>
             <div class="font-medium">{{ formatDate(bookingToCancel.checkOut) }}</div>
+            <div class="text-gray-600 text-sm">Total Amount:</div>
+            <div class="font-medium">${{ bookingToCancel.totalAmount }}</div>
           </div>
         </div>
 
@@ -201,7 +341,7 @@
           <button
             (click)="cancelBooking()"
             [disabled]="isCancelling"
-            class="flex-1 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-300 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            class="flex-1 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-300 font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           >
             <span *ngIf="isCancelling" class="flex items-center justify-center">
               <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -214,7 +354,7 @@
           </button>
           <button
             (click)="closeCancelModal()"
-            class="flex-1 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-300"
+            class="flex-1 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-300 shadow-sm"
           >
             Keep Booking
           </button>
@@ -225,4 +365,3 @@
 
   <app-footer></app-footer>
 </div>
-

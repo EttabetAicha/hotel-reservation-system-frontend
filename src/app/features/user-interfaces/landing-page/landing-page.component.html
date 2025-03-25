@@ -27,7 +27,7 @@
 
       <!-- Search Form -->
       <div class="max-w-5xl mx-auto" @bounce>
-        <form [formGroup]="searchForm" class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-blue-100">
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-blue-100">
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div class="relative">
               <label class="block text-sm font-medium text-blue-700 mb-2">Destination</label>

@@ -12,13 +12,17 @@
       <a href="#" class="text-blue-800 hover:text-blue-600 transition-colors">Hotels</a>
       <a href="#" class="text-blue-800 hover:text-blue-600 transition-colors">Deals</a>
       <a href="#" class="text-blue-800 hover:text-blue-600 transition-colors">Contact</a>
+
     </div>
 
     <div class="flex items-center space-x-4">
       <div  *ngIf="userName; else loggedOut">
         <span class="text-sm mx-5 text-blue-700">Welcome, {{ userName }}!</span>
-        <button (click)="logout()" class="px-4 py-2 text-sm mx-5  bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
-          Log out
+        <button routerLink="/bookings" class="px-4 py-2 text-sm mx-5  bg-indigo-800 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
+          My Booking
+        </button>
+        <button (click)="logout()" class="px-4 py-2 text-sm mx-5  bg-purple-500 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
+          Log Out
         </button>
         <button *ngIf="role === 'ADMIN'" routerLink="/admin/dashboard" class="px-4 py-2  text-sm bg-cyan-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
           Dashboard

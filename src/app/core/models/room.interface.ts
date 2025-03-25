@@ -1,5 +1,3 @@
-import { HotelFormData } from "./hotel.interface"
-
 export interface Room {
   id: number
   name: string
@@ -40,6 +38,10 @@ export interface RoomFormData {
   isAvailable: boolean;
   description: string;
   imageUrl: string;
+  capacity?:number
   status: RoomStatus;
+  originalPrice?: number
+  features?: string[]
+  discount?: number
   hotelName?:string
 }

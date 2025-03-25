@@ -19,7 +19,14 @@ export interface HotelFormData {
   name: string;
   address: string;
   city: string;
+  originalPrice?: number
+  discount?: number
+  price?: number
+  reviewCount?:number
+  distance?: string
+  location?: string
   country: string;
+  isFavorite?: boolean
   rating: string;
   description: string;
   stars: number;

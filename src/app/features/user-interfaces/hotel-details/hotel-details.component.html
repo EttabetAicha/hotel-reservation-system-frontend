@@ -16,7 +16,9 @@
     <!-- Hotel Name and Rating -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
       <div @slideInLeft>
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{{ hotel.name }}</h1>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+          {{ hotel.name }}
+        </h1>
         <div class="flex items-center">
           <div class="flex mr-2">
             <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
@@ -27,7 +29,9 @@
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                />
               </svg>
             </ng-container>
           </div>
@@ -42,8 +46,15 @@
       <div class="flex items-center mt-4 md:mt-0" @slideInRight>
         <div class="flex items-center bg-indigo-600 text-white px-3 py-2 rounded-lg">
           <span class="text-xl font-bold mr-1">{{ hotel.rating }}</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+            />
           </svg>
         </div>
         <div class="ml-3 text-gray-700">
@@ -70,16 +81,38 @@
               (click)="prevImage()"
               class="bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full p-2 transition-all duration-200 transform hover:scale-110"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
             <button
               (click)="nextImage()"
               class="bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full p-2 transition-all duration-200 transform hover:scale-110"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           </div>
@@ -90,7 +123,10 @@
           </div>
         </div>
 
-        <div *ngFor="let image of galleryImages.slice(0, 3); let i = index" class="hidden md:block rounded-xl overflow-hidden">
+        <div
+          *ngFor="let image of galleryImages.slice(0, 3); let i = index"
+          class="hidden md:block rounded-xl overflow-hidden"
+        >
           <img
             *ngIf="i + 1 !== currentImageIndex"
             [src]="image"
@@ -111,7 +147,9 @@
             (click)="showAllPhotos = true"
           >
             <div class="text-white text-center">
-              <div class="text-xl font-bold">+{{ galleryImages.length - 4 }}</div>
+              <div class="text-xl font-bold">
+                +{{ galleryImages.length - 4 }}
+              </div>
               <div>More photos</div>
             </div>
           </div>
@@ -127,51 +165,105 @@
       </button>
 
       <!-- Full Gallery Modal -->
-      <div *ngIf="showAllPhotos" class="fixed inset-0 bg-black bg-opacity-90 z-50 overflow-y-auto" @fadeIn>
+      <div
+        *ngIf="showAllPhotos"
+        class="fixed inset-0 bg-black bg-opacity-90 z-50 overflow-y-auto"
+        @fadeIn
+      >
         <div class="flex justify-end p-4">
           <button
             (click)="showAllPhotos = false"
             class="text-white hover:text-gray-300 transition-colors duration-200"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
 
         <div class="container mx-auto px-4 py-8">
-          <h2 class="text-2xl font-bold text-white mb-6">{{ hotel.name }} - All Photos</h2>
+          <h2 class="text-2xl font-bold text-white mb-6">
+            {{ hotel.name }} - All Photos
+          </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div
               *ngFor="let image of galleryImages"
               class="rounded-xl overflow-hidden transform transition-transform duration-300 hover:scale-[1.02]"
               @staggerList
             >
-              <img [src]="image" [alt]="hotel.name" class="w-full h-64 object-cover" />
+              <img
+                [src]="image"
+                [alt]="hotel.name"
+                class="w-full h-64 object-cover"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Main Content Area with Improved Layout -->
     <div class="flex flex-col lg:flex-row gap-8">
       <!-- Left Column: Hotel Details -->
       <div class="lg:w-2/3">
         <!-- Description -->
-        <div class="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-100" @slideInLeft>
-          <h2 class="text-2xl font-bold text-gray-800 mb-4">About {{ hotel.name }}</h2>
+        <div
+          class="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-100"
+          @slideInLeft
+        >
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">
+            About {{ hotel.name }}
+          </h2>
           <div class="prose max-w-none text-gray-700">
             <p class="mb-4">{{ hotel.description }}</p>
-            <p class="mb-4">Nestled in the heart of {{ hotel.location }}, {{ hotel.name }} offers a perfect blend of luxury, comfort, and convenience. Just {{ hotel.distance }}, this exceptional property provides easy access to major attractions, shopping centers, and dining options.</p>
-            <p>Our dedicated staff is committed to ensuring your stay is nothing short of extraordinary. From the moment you arrive, you'll experience the warm hospitality and attention to detail that sets us apart.</p>
+            <p class="mb-4">
+              Nestled in the heart of {{ hotel.location }},
+              {{ hotel.name }} offers a perfect blend of luxury, comfort, and
+              convenience. Just {{ hotel.distance }}, this exceptional property
+              provides easy access to major attractions, shopping centers, and
+              dining options.
+            </p>
+            <p>
+              Our dedicated staff is committed to ensuring your stay is nothing
+              short of extraordinary. From the moment you arrive, you'll
+              experience the warm hospitality and attention to detail that sets
+              us apart.
+            </p>
           </div>
 
           <div class="mt-6">
-            <h3 class="text-lg font-semibold text-gray-800 mb-3">Property Highlights</h3>
+            <h3 class="text-lg font-semibold text-gray-800 mb-3">
+              Property Highlights
+            </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <div *ngFor="let amenity of hotel.amenities" class="flex items-center group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-2 transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              <div
+                *ngFor="let amenity of hotel.amenities"
+                class="flex items-center group"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-indigo-600 mr-2 transition-transform duration-300 group-hover:scale-125"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
                 <span>{{ amenity }}</span>
               </div>
@@ -180,86 +272,142 @@
         </div>
 
         <!-- Rooms -->
-        <div class="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-100" @slideInLeft>
+        <div
+          class="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-100"
+          @slideInLeft
+        >
           <h2 class="text-2xl font-bold text-gray-800 mb-4">Available Rooms</h2>
 
           <div class="space-y-6" @staggerList>
-  <div *ngFor="let room of rooms"
-       [class.border-indigo-500]="selectedRoomType === room.id"
-       [class.bg-indigo-50]="selectedRoomType === room.id"
-       class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all duration-300 hover:translate-y-[-5px]">
-    <div class="flex flex-col md:flex-row">
-      <div class="md:w-1/3 relative">
-        <img [src]="room.image" [alt]="room.name" class="w-full h-48 md:h-full object-cover transition-transform duration-700 hover:scale-110" />
-        <div *ngIf="room.discount" class="absolute top-2 left-2 bg-rose-500 text-white px-2 py-1 rounded-md text-sm font-bold animate-pulse">
-          {{ room.discount }}% OFF
-        </div>
-      </div>
+            <div
+              *ngFor="let room of rooms"
+              [class.border-indigo-500]="selectedRoomType === room.id"
+              [class.bg-indigo-50]="selectedRoomType === room.id"
+              class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all duration-300 hover:translate-y-[-5px]"
+            >
+              <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/3 relative">
+                  <img
+                    [src]="room.imageUrl"
+                    [alt]="room.name"
+                    class="w-full h-48 md:h-full object-cover transition-transform duration-700 hover:scale-110"
+                  />
+                  <div
+                    *ngIf="room.discount"
+                    class="absolute top-2 left-2 bg-rose-500 text-white px-2 py-1 rounded-md text-sm font-bold animate-pulse"
+                  >
+                    {{ room.discount }}% OFF
+                  </div>
+                </div>
 
-      <div class="p-4 md:w-2/3 flex flex-col">
-        <div class="flex justify-between items-start mb-2">
-          <h3 class="text-lg font-bold text-gray-800">{{ room.name }}</h3>
-          <div class="flex items-center text-sm text-gray-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-            <span>{{ room.capacity }} guests</span>
-          </div>
-        </div>
+                <div class="p-4 md:w-2/3 flex flex-col">
+                  <div class="flex justify-between items-start mb-2">
+                    <h3 class="text-lg font-bold text-gray-800">{{ room.name }}</h3>
+                    <div class="flex items-center text-sm text-gray-600">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-500 mr-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                        />
+                      </svg>
+                      <span>{{ room.capacity }} guests</span>
+                    </div>
+                  </div>
 
-        <div class="flex flex-wrap gap-2 mb-3">
-          <span *ngFor="let feature of room.features.slice(0, 4)" class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs hover:bg-indigo-100 transition-colors duration-200">
-            {{ feature }}
-          </span>
-          <span *ngIf="room.features.length > 4" class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs hover:bg-indigo-100 transition-colors duration-200">
-            +{{ room.features.length - 4 }} more
-          </span>
-        </div>
+                  <div class="flex flex-wrap gap-2 mb-3">
+                    <span
+                      *ngFor="let feature of room.features?.slice(0, 4)"
+                      class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs hover:bg-indigo-100 transition-colors duration-200"
+                    >
+                      {{ feature }}
+                    </span>
+                    <span
+                      *ngIf="room.features && room.features.length > 4"
+                      class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs hover:bg-indigo-100 transition-colors duration-200"
+                    >
+                      +{{ room.features.length - 4 }} more
+                    </span>
+                  </div>
 
-        <p class="text-gray-600 text-sm mb-4">{{ room.description }}</p>
+                  <p class="text-gray-600 text-sm mb-4">{{ room.description }}</p>
 
-        <div class="flex justify-between items-end mt-auto">
-          <div>
-            <div class="flex items-center">
-              <span *ngIf="room.originalPrice" class="text-sm line-through text-gray-500 mr-2">${{ room.originalPrice }}</span>
-              <span class="text-xl font-bold text-gray-800">${{ room.price }}</span>
-              <span class="text-sm text-gray-600 ml-1">/ night</span>
+                  <div class="flex justify-between items-end mt-auto">
+                    <div>
+                      <div class="flex items-center">
+                        <span
+                          *ngIf="room.originalPrice"
+                          class="text-sm line-through text-gray-500 mr-2"
+                          >${{ room.originalPrice }}</span
+                        >
+                        <span class="text-xl font-bold text-gray-800">${{ room.price }}</span>
+                        <span class="text-sm text-gray-600 ml-1">/ night</span>
+                      </div>
+                      <div class="text-xs text-gray-500">Includes taxes and fees</div>
+                    </div>
+
+                    <button
+                      (click)="room.id && selectRoom(room.id)"
+                      class="px-4 py-2 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105"
+                      [class.bg-indigo-600]="selectedRoomType === room.id"
+                      [class.text-white]="selectedRoomType === room.id"
+                      [class.hover:bg-indigo-700]="selectedRoomType === room.id"
+                      [class.bg-gray-200]="selectedRoomType !== room.id"
+                      [class.text-gray-700]="selectedRoomType !== room.id"
+                    >
+                      <span *ngIf="selectedRoomType !== room.id">Select Room</span>
+                      <span *ngIf="selectedRoomType === room.id" class="flex items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 mr-1"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        Selected
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="text-xs text-gray-500">Includes taxes and fees</div>
           </div>
-
-          <button
-            (click)="selectRoom(room.id)"
-            class="px-4 py-2 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105"
-            [class.bg-indigo-600]="selectedRoomType !== room.id"
-            [class.text-white]="selectedRoomType !== room.id"
-            [class.hover:bg-indigo-700]="selectedRoomType !== room.id"
-            [class.bg-green-600]="selectedRoomType === room.id"
-            [class.hover:bg-green-700]="selectedRoomType === room.id"
-          >
-            <span *ngIf="selectedRoomType !== room.id">Select Room</span>
-            <span *ngIf="selectedRoomType === room.id" class="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Selected
-            </span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
         </div>
 
         <!-- Reviews -->
-        <div class="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-100 overflow-hidden" @slideInLeft>
+        <div
+          class="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-100 overflow-hidden"
+          @slideInLeft
+        >
           <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold text-gray-800">Guest Reviews</h2>
-            <div class="flex items-center bg-indigo-600 text-white px-3 py-1 rounded-lg">
+            <div
+              class="flex items-center bg-indigo-600 text-white px-3 py-1 rounded-lg"
+            >
               <span class="text-xl font-bold mr-1">{{ hotel.rating }}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                />
               </svg>
             </div>
           </div>
@@ -267,27 +415,40 @@
           <!-- Rating Breakdown -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-3">Rating Breakdown</h3>
+              <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                Rating Breakdown
+              </h3>
               <div class="space-y-2">
-                <div *ngFor="let category of reviewCategories" class="flex items-center">
+                <div
+                  *ngFor="let category of reviewCategories"
+                  class="flex items-center"
+                >
                   <span class="w-32 text-gray-700">{{ category.name }}</span>
-                  <div class="flex-grow h-2 bg-gray-200 rounded-full mx-2 overflow-hidden">
+                  <div
+                    class="flex-grow h-2 bg-gray-200 rounded-full mx-2 overflow-hidden"
+                  >
                     <div
                       class="h-2 bg-indigo-600 rounded-full transition-all duration-1000 ease-out"
                       [style.width.%]="category.score * 10"
                     ></div>
                   </div>
-                  <span class="text-gray-700 font-medium">{{ category.score }}</span>
+                  <span class="text-gray-700 font-medium">{{
+                    category.score
+                  }}</span>
                 </div>
               </div>
             </div>
 
             <div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-3">Traveler Rating</h3>
+              <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                Traveler Rating
+              </h3>
               <div class="space-y-2">
                 <div *ngFor="let rating of ratings" class="flex items-center">
                   <span class="w-24 text-gray-700">{{ rating.name }}</span>
-                  <div class="flex-grow h-2 bg-gray-200 rounded-full mx-2 overflow-hidden">
+                  <div
+                    class="flex-grow h-2 bg-gray-200 rounded-full mx-2 overflow-hidden"
+                  >
                     <div
                       class="h-2 bg-indigo-600 rounded-full transition-all duration-1000 ease-out"
                       [style.width.%]="rating.percentage"
@@ -300,17 +461,40 @@
           </div>
 
           <!-- Review List -->
-          <div class="space-y-6 max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-200 scrollbar-track-gray-100 pr-2" @staggerList>
-            <div *ngFor="let review of reviews" class="border-b border-gray-200 pb-6 last:border-0">
+          <div
+            class="space-y-6 max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-200 scrollbar-track-gray-100 pr-2"
+            @staggerList
+          >
+            <div
+              *ngFor="let review of reviews"
+              class="border-b border-gray-200 pb-6 last:border-0"
+            >
               <div class="flex items-start gap-2">
-                  <img [src]="review.image" [alt]="review.author" class="rounded-full w-15 h-15 transition-transform duration-700 hover:scale-110" />
+                <img
+                  [src]="review.image"
+                  [alt]="review.author"
+                  class="rounded-full w-15 h-15 transition-transform duration-700 hover:scale-110"
+                />
                 <div class="flex-grow">
                   <div class="flex justify-between items-start">
                     <div>
-                      <h4 class="font-bold text-gray-800">{{ review.author }}</h4>
+                      <h4 class="font-bold text-gray-800">
+                        {{ review.author }}
+                      </h4>
                       <div class="flex items-center text-sm text-gray-600 mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 w-4 mr-1"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          />
                         </svg>
                         <span>{{ review.date }}</span>
                         <span class="mx-2">•</span>
@@ -318,38 +502,74 @@
                       </div>
                     </div>
 
-                    <div class="flex items-center bg-indigo-600 text-white px-2 py-1 rounded">
+                    <div
+                      class="flex items-center bg-indigo-600 text-white px-2 py-1 rounded"
+                    >
                       <span class="font-bold mr-1">{{ review.rating }}</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        />
                       </svg>
                     </div>
                   </div>
 
                   <div class="mt-3">
-                    <h5 class="font-semibold text-gray-800 mb-2">{{ review.title }}</h5>
+                    <h5 class="font-semibold text-gray-800 mb-2">
+                      {{ review.title }}
+                    </h5>
                     <p class="text-gray-700">{{ review.comment }}</p>
 
-                    <div *ngIf="review.pros || review.cons" class="mt-3 space-y-2">
+                    <div
+                      *ngIf="review.pros || review.cons"
+                      class="mt-3 space-y-2"
+                    >
                       <div *ngIf="review.pros" class="flex">
                         <div class="text-green-600 mr-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clip-rule="evenodd"
+                            />
                           </svg>
                         </div>
                         <div>
-                          <span class="font-medium text-gray-800">Liked:</span> {{ review.pros }}
+                          <span class="font-medium text-gray-800">Liked:</span>
+                          {{ review.pros }}
                         </div>
                       </div>
 
                       <div *ngIf="review.cons" class="flex">
                         <div class="text-red-600 mr-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                              clip-rule="evenodd"
+                            />
                           </svg>
                         </div>
                         <div>
-                          <span class="font-medium text-gray-800">Disliked:</span> {{ review.cons }}
+                          <span class="font-medium text-gray-800"
+                            >Disliked:</span
+                          >
+                          {{ review.cons }}
                         </div>
                       </div>
                     </div>
@@ -361,45 +581,90 @@
 
           <!-- Show More Reviews Button -->
           <div class="mt-6 text-center">
-            <button class="px-6 py-2 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors duration-300">
+            <button
+              class="px-6 py-2 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors duration-300"
+            >
               Show More Reviews
             </button>
           </div>
         </div>
 
         <!-- Location -->
-        <div class="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-100" @slideInLeft>
+        <div
+          class="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-100"
+          @slideInLeft
+        >
           <h2 class="text-2xl font-bold text-gray-800 mb-4">Location</h2>
 
           <div class="aspect-w-16 aspect-h-9 mb-4 rounded-lg overflow-hidden">
             <img
-              src="https://maps.googleapis.com/maps/api/staticmap?center={{ hotel.location }}&zoom=14&size=800x400&markers=color:red%7C{{ hotel.location }}&key=YOUR_API_KEY"
+              src="https://maps.googleapis.com/maps/api/staticmap?center={{
+                hotel.location
+              }}&zoom=14&size=800x400&markers=color:red%7C{{
+                hotel.location
+              }}&key=AIzaSyCE38p2PlbXEsKLF93mkE4WPmtVNf_EO_k"
               alt="Map location of {{ hotel.name }}"
               class="w-full h-full object-cover rounded-lg"
             />
           </div>
 
           <div class="flex items-start mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-indigo-600 mr-2 mt-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
             </svg>
             <div>
               <h3 class="font-semibold text-gray-800">Address</h3>
-              <p class="text-gray-700">123 Main Street, {{ hotel.location }}, 10001</p>
+              <p class="text-gray-700">
+                123 Main Street, {{ hotel.location }}, 10001
+              </p>
             </div>
           </div>
 
           <div class="space-y-3">
             <h3 class="font-semibold text-gray-800">Nearby Attractions</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <div *ngFor="let attraction of nearbyAttractions" class="flex items-start group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-2 mt-1 transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              <div
+                *ngFor="let attraction of nearbyAttractions"
+                class="flex items-start group"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-indigo-600 mr-2 mt-1 transition-transform duration-300 group-hover:scale-125"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                  />
                 </svg>
                 <div>
-                  <div class="font-medium text-gray-800">{{ attraction.name }}</div>
-                  <div class="text-sm text-gray-600">{{ attraction.distance }} away</div>
+                  <div class="font-medium text-gray-800">
+                    {{ attraction.name }}
+                  </div>
+                  <div class="text-sm text-gray-600">
+                    {{ attraction.distance }} away
+                  </div>
                 </div>
               </div>
             </div>
@@ -407,52 +672,78 @@
         </div>
       </div>
 
-      <!-- Right Column: Booking Widget -->
+      <!-- Right Column: Booking Widget - FIXED STYLING HERE -->
       <div class="lg:w-1/3">
-        <div class="sticky top-24">
+        <!-- This is the fixed sticky container for the booking widget -->
+        <div class="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto z-10 flex flex-col gap-4">
           <!-- Booking Widget -->
-          <div id="booking-widget" class="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300" @slideInRight>
+          <div
+            id="booking-widget"
+            class="bg-white rounded-xl shadow-lg p-5 border border-gray-100 hover:shadow-xl transition-all duration-300"
+            @slideInRight
+          >
             <h2 class="text-xl font-bold text-gray-800 mb-4">Book Your Stay</h2>
 
             <div class="mb-4">
               <div class="flex items-center justify-between mb-2">
                 <div class="text-gray-700 font-medium">Price</div>
                 <div class="flex items-center">
-                  <span *ngIf="hotel?.originalPrice" class="text-sm line-through text-gray-500 mr-2">${{ hotel.originalPrice }}</span>
-                  <span class="text-2xl font-bold text-gray-800">${{ hotel.price }}</span>
+                  <span
+                    *ngIf="hotel?.originalPrice"
+                    class="text-sm line-through text-gray-500 mr-2"
+                    >${{ hotel.originalPrice }}</span
+                  >
+                  <span class="text-2xl font-bold text-gray-800"
+                    >${{ hotel.price }}</span
+                  >
                   <span class="text-gray-600 ml-1">/ night</span>
                 </div>
               </div>
 
-              <div *ngIf="hotel.discount" class="bg-rose-100 text-rose-800 p-2 rounded-md text-sm mb-4 animate-pulse">
+              <div
+                *ngIf="hotel.discount"
+                class="bg-rose-100 text-rose-800 p-2 rounded-md text-sm mb-4 animate-pulse"
+              >
                 Save {{ hotel.discount }}% on your booking when you book today!
               </div>
             </div>
 
             <div class="space-y-4">
-              <!-- Check-in/Check-out -->
               <div class="grid grid-cols-2 gap-3">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Check-in</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Check-in</label
+                  >
                   <input
                     type="date"
+                    id="checkInDate"
                     [(ngModel)]="checkInDate"
+                    (change)="onDateChange()"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Check-out</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Check-out</label
+                  >
                   <input
                     type="date"
+                    id="checkOutDate"
                     [(ngModel)]="checkOutDate"
+                    (change)="onDateChange()"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
+              <div *ngIf="dateErrorMessage" class="mt-2 text-sm text-red-600">
+                {{ dateErrorMessage }}
+              </div>
 
               <!-- Guests -->
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Guests</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Guests</label
+                >
                 <div class="relative">
                   <select
                     [(ngModel)]="guestCount"
@@ -465,9 +756,22 @@
                     <option [value]="5">5 guests</option>
                     <option [value]="6">6 guests</option>
                   </select>
-                  <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  <div
+                    class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -475,22 +779,39 @@
 
               <!-- Room Type -->
               <div>
-  <label class="block text-sm font-medium text-gray-700 mb-1">Room Type</label>
-  <div class="relative">
-    <select
-      [(ngModel)]="selectedRoomType"
-      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none"
-    >
-      <option [ngValue]="0" disabled>Select a room</option>
-      <option *ngFor="let room of rooms" [ngValue]="room.id">{{ room.name }} - ${{ room.price }}/night</option>
-    </select>
-    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
-    </div>
-  </div>
-</div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Room Type</label
+                >
+                <div class="relative">
+                  <select
+                    [(ngModel)]="selectedRoomType"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none"
+                  >
+                    <option [ngValue]="0" disabled>Select a room</option>
+                    <option *ngFor="let room of rooms" [ngValue]="room.id">
+                      {{ room.name }} - ${{ room.price }}/night
+                    </option>
+                  </select>
+                  <div
+                    class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <!-- Price Breakdown -->
@@ -504,25 +825,30 @@
                   <span>Taxes & fees</span>
                   <span>${{ getTaxes() }}</span>
                 </div>
-                <div *ngIf="getDiscount() > 0" class="flex justify-between text-green-600">
+                <div
+                  *ngIf="getDiscount() > 0"
+                  class="flex justify-between text-green-600"
+                >
                   <span>Discount</span>
                   <span>-${{ getDiscount() }}</span>
                 </div>
               </div>
 
-              <div class="flex justify-between font-bold text-lg text-gray-800 mt-4 pt-4 border-t border-gray-200">
+              <div
+                class="flex justify-between font-bold text-lg text-gray-800 mt-4 pt-4 border-t border-gray-200"
+              >
                 <span>Total</span>
                 <span>${{ getTotal() }}</span>
               </div>
             </div>
 
             <button
-  (click)="bookNow()"
-  [disabled]="!selectedRoomType || selectedRoomType === 0"
-  class="w-full py-3 mt-6 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-300 font-medium transform hover:scale-[1.02] hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
->
-  Book Now
-</button>
+              (click)="bookNow()"
+              [disabled]="!selectedRoomType"
+              class="w-full py-3 mt-6 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-300 font-medium transform hover:scale-[1.02] hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Book Now
+            </button>
 
             <div class="mt-4 text-center text-sm text-gray-600">
               <span>You won't be charged yet</span>
@@ -530,24 +856,53 @@
           </div>
 
           <!-- Property Policies -->
-          <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300" @slideInRight>
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Property Policies</h2>
+          <div
+            class="bg-white rounded-xl shadow-md p-5 border border-gray-100 hover:shadow-lg transition-shadow duration-300"
+            @slideInRight
+          >
+            <h2 class="text-xl font-bold text-gray-800 mb-4">
+              Property Policies
+            </h2>
 
             <div class="space-y-4">
               <div class="flex items-start group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-2 mt-0.5 transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-indigo-600 mr-2 mt-0.5 transition-transform duration-300 group-hover:scale-125"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
                 <div>
-                  <div class="font-medium text-gray-800">Check-in/Check-out</div>
+                  <div class="font-medium text-gray-800">
+                    Check-in/Check-out
+                  </div>
                   <div class="text-gray-700">Check-in: 3:00 PM - 11:00 PM</div>
                   <div class="text-gray-700">Check-out: 11:00 AM</div>
                 </div>
               </div>
 
               <div class="flex items-start group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-2 mt-0.5 transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-indigo-600 mr-2 mt-0.5 transition-transform duration-300 group-hover:scale-125"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                  />
                 </svg>
                 <div>
                   <div class="font-medium text-gray-800">Payment</div>
@@ -556,22 +911,50 @@
               </div>
 
               <div class="flex items-start group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-2 mt-0.5 transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-indigo-600 mr-2 mt-0.5 transition-transform duration-300 group-hover:scale-125"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  />
                 </svg>
                 <div>
-                  <div class="font-medium text-gray-800">Cancellation Policy</div>
-                  <div class="text-gray-700">Free cancellation up to 48 hours before check-in</div>
+                  <div class="font-medium text-gray-800">
+                    Cancellation Policy
+                  </div>
+                  <div class="text-gray-700">
+                    Free cancellation up to 48 hours before check-in
+                  </div>
                 </div>
               </div>
 
               <div class="flex items-start group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-2 mt-0.5 transition-transform duration-300 group-hover:scale-125"  class="h-5 w-5 text-indigo-600 mr-2 mt-0.5 transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-indigo-600 mr-2 mt-0.5 transition-transform duration-300 group-hover:scale-125"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
+                  />
                 </svg>
                 <div>
                   <div class="font-medium text-gray-800">Special Requests</div>
-                  <div class="text-gray-700">Please note special requests cannot be guaranteed</div>
+                  <div class="text-gray-700">
+                    Please note special requests cannot be guaranteed
+                  </div>
                 </div>
               </div>
             </div>
@@ -582,8 +965,15 @@
   </div>
 
   <!-- Booking Confirmation Modal -->
-  <div *ngIf="showBookingConfirmation" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" @fadeIn>
-    <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" @slideInUp>
+  <div
+    *ngIf="showBookingConfirmation"
+    class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+    @fadeIn
+  >
+    <div
+      class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+      @slideInUp
+    >
       <div class="p-6 border-b border-gray-200">
         <div class="flex justify-between items-center">
           <h2 class="text-2xl font-bold text-gray-800">Booking Confirmation</h2>
@@ -591,8 +981,19 @@
             (click)="closeBookingConfirmation()"
             class="text-gray-500 hover:text-gray-700 transition-colors duration-200"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -601,16 +1002,35 @@
       <div class="p-6" *ngIf="bookingDetails">
         <div class="flex items-center justify-center mb-6">
           <div class="bg-green-100 text-green-800 p-3 rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-10 w-10"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </div>
         </div>
 
         <div class="text-center mb-6">
-          <h3 class="text-xl font-bold text-gray-800 mb-2">Thank You for Your Booking!</h3>
-          <p class="text-gray-600">Your reservation at {{ bookingDetails.hotel.name }} has been confirmed.</p>
-          <p class="text-gray-600">Booking ID: <span class="font-semibold">{{ bookingDetails.bookingId }}</span></p>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">
+            Thank You for Your Booking!
+          </h3>
+          <p class="text-gray-600">
+            Your reservation at {{ bookingDetails.hotel.name }} has been
+            confirmed.
+          </p>
+          <p class="text-gray-600">
+            Booking ID:
+            <span class="font-semibold">{{ bookingDetails.bookingId }}</span>
+          </p>
         </div>
 
         <div class="bg-gray-50 rounded-lg p-4 mb-6">
@@ -619,15 +1039,22 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <div class="text-sm text-gray-600">Check-in</div>
-              <div class="font-medium">{{ bookingDetails.checkIn | date:'mediumDate' }}</div>
+              <div class="font-medium">
+                {{ bookingDetails.checkIn | date : "mediumDate" }}
+              </div>
             </div>
             <div>
               <div class="text-sm text-gray-600">Check-out</div>
-              <div class="font-medium">{{ bookingDetails.checkOut | date:'mediumDate' }}</div>
+              <div class="font-medium">
+                {{ bookingDetails.checkOut | date : "mediumDate" }}
+              </div>
             </div>
             <div>
               <div class="text-sm text-gray-600">Guests</div>
-              <div class="font-medium">{{ bookingDetails.guests }} {{ bookingDetails.guests > 1 ? 'guests' : 'guest' }}</div>
+              <div class="font-medium">
+                {{ bookingDetails.guests }}
+                {{ bookingDetails.guests > 1 ? "guests" : "guest" }}
+              </div>
             </div>
             <div>
               <div class="text-sm text-gray-600">Room Type</div>
@@ -641,18 +1068,25 @@
 
           <div class="space-y-2">
             <div class="flex justify-between">
-              <span class="text-gray-600">{{ bookingDetails.nights }} nights</span>
+              <span class="text-gray-600"
+                >{{ bookingDetails.nights }} nights</span
+              >
               <span>${{ bookingDetails.subtotal }}</span>
             </div>
             <div class="flex justify-between">
               <span class="text-gray-600">Taxes & fees</span>
               <span>${{ bookingDetails.taxes }}</span>
             </div>
-            <div *ngIf="bookingDetails.discount > 0" class="flex justify-between text-green-600">
+            <div
+              *ngIf="bookingDetails.discount > 0"
+              class="flex justify-between text-green-600"
+            >
               <span>Discount</span>
               <span>-${{ bookingDetails.discount }}</span>
             </div>
-            <div class="flex justify-between font-bold text-lg pt-2 border-t border-gray-200">
+            <div
+              class="flex justify-between font-bold text-lg pt-2 border-t border-gray-200"
+            >
               <span>Total</span>
               <span>${{ bookingDetails.total }}</span>
             </div>
@@ -661,13 +1095,25 @@
 
         <div class="bg-blue-50 rounded-lg p-4 mb-6">
           <div class="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-blue-600 mr-2 mt-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
             <div>
               <div class="font-medium text-blue-800">Important Information</div>
               <div class="text-sm text-blue-700">
-                A confirmation email has been sent to your email address. Please present your booking ID at check-in.
+                A confirmation email has been sent to your email address. Please
+                present your booking ID at check-in.
               </div>
             </div>
           </div>
@@ -693,4 +1139,3 @@
 
   <app-footer></app-footer>
 </div>
-

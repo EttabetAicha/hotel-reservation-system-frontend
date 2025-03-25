@@ -11,10 +11,10 @@
         </svg>
       </button>
 
-      <app-hotel-detail
-        [hotel]="selectedHotel"
-        [hotelRooms]="generateRoomsForHotel(selectedHotel)"
-      ></app-hotel-detail>
+        <!-- <app-hotel-detail
+          [hotel]="selectedHotel"
+          [hotelRooms]="generateRoomsForHotel(selectedHotel)"
+        ></app-hotel-detail> -->
     </div>
 
     <div class="relative">
@@ -140,12 +140,11 @@
             </div>
           </div>
 
-          <!-- Hotel listings -->
           <div class="flex-grow" @fadeIn>
             <div class="mb-6 flex justify-between items-center">
               <h2 class="text-xl font-bold text-gray-800">{{ filteredHotels.length }} hotels found</h2>
               <div class="text-sm text-gray-500">
-                Showing {{ (currentPage - 1) * itemsPerPage + 1 }}-{{ Math.min(currentPage * itemsPerPage, filteredHotels.length) }} of {{ filteredHotels.length }}
+                Showing {{ (currentPage - 1) * itemsPerPage + 1 }}-{{ calculateMinValue(currentPage * itemsPerPage, filteredHotels.length) }} of {{ filteredHotels.length }}
               </div>
             </div>
 
@@ -155,8 +154,8 @@
                 *ngFor="let hotel of paginatedHotels"
                 [hotel]="hotel"
                 [viewMode]="viewMode"
-                (toggleFavorite)="toggleFavorite($event)"
-                (viewHotelDetails)="viewHotelDetails(hotel.id)"
+                (toggleFavorite)="toggleFavorite($event.toString())"
+                (viewHotelDetails)="hotel.id ? viewHotelDetails(hotel.id) : null"
               ></app-hotel-card>
             </div>
 
@@ -166,8 +165,8 @@
                 *ngFor="let hotel of paginatedHotels"
                 [hotel]="hotel"
                 [viewMode]="viewMode"
-                (toggleFavorite)="toggleFavorite($event)"
-                (viewHotelDetails)="viewHotelDetails(hotel.id)"
+                (toggleFavorite)="toggleFavorite($event.toString())"
+                (viewHotelDetails)="viewHotelDetails(hotel.id ?? '')"
               ></app-hotel-card>
             </div>
 
