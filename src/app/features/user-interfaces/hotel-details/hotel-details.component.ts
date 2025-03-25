@@ -113,9 +113,7 @@ export class HotelDetailComponent implements OnInit {
         this.router.navigate(["/hotel-list"]);
       }
     });
-    setTimeout(() => {
-      this.generateMapUrl();
-    });
+  
   }
   generateRandomLocation(): string {
     const lat = (40.7128 + (Math.random() * 0.1 - 0.05)).toFixed(6);
@@ -123,10 +121,7 @@ export class HotelDetailComponent implements OnInit {
     return `${lat},${lng}`;
   }
 
-  generateMapUrl(): void {
-    const location = this.generateRandomLocation();
-    this.mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${location}&zoom=14&size=800x400&markers=color:red%7C${location}&key=AIzaSyCE38p2PlbXEsKLF93mkE4WPmtVNf_EO_k`;
-  }
+
 
 
 
