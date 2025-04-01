@@ -6,7 +6,6 @@ import { Reservation, ReservationStatus } from "../../../core/models/reservation
 import { Payment, PaymentStatus } from "../../../core/models/payment.interface"
 import { forkJoin, map, Observable, of, switchMap } from "rxjs"
 
-// Extended Booking interface that includes additional display properties
 interface AdminBooking {
   id: string;
   guestName: string;
@@ -20,8 +19,7 @@ interface AdminBooking {
   status: string;
   paymentStatus: string;
   createdAt: string;
-  reservation: Reservation; // Store the original reservation for reference
-}
+  reservation: Reservation;}
 
 @Component({
   selector: "app-admin-bookings",
@@ -54,7 +52,6 @@ export class AdminBookingsComponent implements OnInit {
           return of([])
         }
 
-        // Create an array of observables for each reservation to fetch additional data
         const bookingObservables = reservations.map(reservation => {
           return forkJoin({
             roomName: this.reservationService.getRoomNameById(reservation.roomId),
@@ -122,7 +119,7 @@ export class AdminBookingsComponent implements OnInit {
       status: displayStatus,
       paymentStatus: displayPaymentStatus,
       createdAt: reservation.createdAt ? reservation.createdAt.toString() : new Date().toISOString(),
-      reservation // Store the original reservation
+      reservation
     }
   }
 

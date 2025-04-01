@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -9,7 +9,7 @@ import { FooterComponent } from '../footer/footer.component';
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NavbarComponent, FooterComponent],
+  imports: [CommonModule, ReactiveFormsModule, NavbarComponent, FooterComponent,RouterLink],
   animations: [
     trigger('fadeInUp', [
       state('void', style({

@@ -91,7 +91,7 @@ export class AdminNotificationService {
         message: "John Smith has made a new booking at Grand Plaza Hotel",
         type: "booking",
         isRead: false,
-        createdAt: new Date(Date.now() - 1000 * 60 * 5), // 5 minutes ago
+        createdAt: new Date(Date.now() - 1000 * 60 * 5),
         link: "/admin/bookings",
       },
       {
@@ -100,7 +100,7 @@ export class AdminNotificationService {
         message: "Sarah Johnson has cancelled her booking at Seaside Resort",
         type: "alert",
         isRead: false,
-        createdAt: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
+        createdAt: new Date(Date.now() - 1000 * 60 * 30),
         link: "/admin/bookings",
       },
       {
@@ -109,7 +109,7 @@ export class AdminNotificationService {
         message: "The system will undergo maintenance tonight at 2:00 AM",
         type: "system",
         isRead: true,
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), 
       },
       {
         id: this.generateId(),
@@ -117,7 +117,7 @@ export class AdminNotificationService {
         message: "Only 2 rooms left at Mountain View Lodge for the weekend",
         type: "alert",
         isRead: false,
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 5), // 5 hours ago
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 5),
         link: "/admin/rooms",
       },
       {
@@ -126,7 +126,7 @@ export class AdminNotificationService {
         message: "A new 5-star review has been submitted for Urban Loft Suites",
         type: "info",
         isRead: true,
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24),
         link: "/admin/reviews",
       },
       {
@@ -135,7 +135,7 @@ export class AdminNotificationService {
         message: "Payment of $1,250 received for booking #BK-12350",
         type: "booking",
         isRead: true,
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2), // 2 days ago
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2),
         link: "/admin/bookings",
       },
     ]

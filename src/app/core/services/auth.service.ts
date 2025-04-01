@@ -80,10 +80,8 @@ login(loginRequest: LoginRequest): Observable<any> {
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
-      // Client-side or network error
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     console.error('An error occurred:', errorMessage);

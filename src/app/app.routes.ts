@@ -45,10 +45,12 @@ export const routes: Routes = [
     component: HotelDetailComponent,
   },
   {
+
     path: "payment",
     component: PaymentComponent,
   },
   {
+
     path: "bookings",
     component: BookingsComponent,
   },

@@ -52,7 +52,7 @@ export class BookingDetailsComponent implements OnInit {
       this.isLoading = false
 
       if (!booking) {
-        // Booking not found, redirect to bookings list
+        
         this.router.navigate(["/bookings"])
       }
     })
